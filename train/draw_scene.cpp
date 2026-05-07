@@ -10,6 +10,8 @@ GLBI_Set_Of_Points somePoints(3);
 GLBI_Convex_2D_Shape ground{3};
 StandardMesh* repere = NULL;
 IndexedMesh* sphere;
+IndexedMesh* cyl;
+IndexedMesh* cube;
 
 int angle{};
 
@@ -26,6 +28,18 @@ void initScene() {
 
 	repere = createRepere(10.0f);
 	repere->createVAO(); // Creation de l'objet dans OpenGL
+
+	// Un cylindre de hauteur 20 et de rayon 5
+	cyl = basicCylinder(20.0,5.);
+	cyl->createVAO(); // Creation de l'objet dans OpenGL
+
+	// Un cube de taille 20
+	cube = basicCube(20.0f);
+	cube->createVAO(); // Creation de l'objet dans OpenGL
+}
+
+void rails() {
+	
 }
 
 void drawScene() {
