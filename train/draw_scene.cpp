@@ -26,25 +26,6 @@ void initScene() {
 
 	repere = createRepere(10.0f);
 	repere->createVAO(); // Creation de l'objet dans OpenGL
-
-	sphere = basicSphere();
-	sphere->createVAO();
-}
-
-void drawFrame() {
-	// Cf code Juju
-}
-
-void drawBase() {
-	// TO DO
-}
-
-void drawArm() {
-	// TO DO
-}
-
-void drawPan() {
-	// TO DO
 }
 
 void drawScene() {
@@ -56,14 +37,4 @@ void drawScene() {
 
 	ground.drawShape();
 	repere->draw();
-
-	myEngine.mvMatrixStack.pushMatrix();
-		myEngine.mvMatrixStack.addRotation(M_PI * angle / 180, {0.0, 0.0, 1.0});
-		myEngine.mvMatrixStack.addTranslation({4.0, 0.f, 5.0});
-		myEngine.mvMatrixStack.addHomothety({3.f, 3.f, 3.0});
-		myEngine.updateMvMatrix();
-		myEngine.setFlatColor(1.,1.0,0.0);
-		sphere->draw();
-		angle++;
-	myEngine.mvMatrixStack.popMatrix();
 }
