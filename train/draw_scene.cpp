@@ -17,10 +17,10 @@ void initScene() {
 	std::vector<float> points {0.0,0.0,0.0};
 	somePoints.initSet(points,1.0,1.0,1.0);
 
-	std::vector<float> baseCarre{-10.0,-10.0,0.0,
-								 10.0,-10.0,0.0,
-								 10.0,10.0,0.0,
-								 -10.0,10.0,0.0};
+	std::vector<float> baseCarre{-100.0,-100.0,0.0,
+								 100.0,-100.0,0.0,
+								 100.0,100.0,0.0,
+								 -100.0,100.0,0.0};
 	ground.initShape(baseCarre);
 	ground.changeNature(GL_TRIANGLE_FAN);
 
@@ -30,8 +30,6 @@ void initScene() {
 
 void drawScene() {
 	glPointSize(10.0);
-
-	somePoints.drawSet();
 
 	myEngine.setFlatColor(0.2,0.0,0.0);
 
