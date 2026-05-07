@@ -13,7 +13,10 @@ IndexedMesh* sphere;
 IndexedMesh* cyl;
 IndexedMesh* cube;
 
-int angle{};
+float rr {};
+float sx {};
+float sr {}; 
+float size_grid {/*rails.size_grid*/};
 
 void initScene() {
 	std::vector<float> points {0.0,0.0,0.0};
@@ -33,13 +36,22 @@ void initScene() {
 	cyl = basicCylinder(20.0,5.);
 	cyl->createVAO(); // Creation de l'objet dans OpenGL
 
-	// Un cube de taille 20
-	cube = basicCube(20.0f);
+	// Un cube de taille 1
+	cube = basicCube(1.f);
 	cube->createVAO(); // Creation de l'objet dans OpenGL
 }
 
-void rails() {
-	
+void rails_straight() {
+	myEngine.mvMatrixStack.pushMatrix();
+		myEngine.mvMatrixStack.addHomothety({sr, size_grid, sr});
+		myEngine.updateMvMatrix();
+		myEngine.setFlatColor(0.5,0.5,0.5);
+		cube->draw();
+	myEngine.mvMatrixStack.popMatrix();
+}
+
+void rails_curved() {
+
 }
 
 void drawScene() {
