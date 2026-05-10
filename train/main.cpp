@@ -28,7 +28,6 @@ void onWindowResized(GLFWwindow* /*window*/, int width, int height)
 
 	glViewport(0, 0, width, height);
 	std::cerr<<"Setting 3D projection"<<std::endl;
-	// TO DO EX01 part 2
 }
 
 void onKey(GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods*/)
@@ -44,7 +43,6 @@ void onKey(GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods
 			break;
 		case GLFW_KEY_P:
 			if (is_pressed) glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-		// TO DO EX01 part 3
 		    case GLFW_KEY_UP :
 				angle_phy += 1.0;
 				break;
@@ -56,15 +54,6 @@ void onKey(GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods
 				break;
 			case GLFW_KEY_RIGHT :
 				angle_theta -= 1.0;
-			break;
-
-		case GLFW_KEY_R :
-			//> EXO 3
-			//< FIN EXO 3
-			break;
-		case GLFW_KEY_T :
-			//> EXO 3
-			//< FIN EXO 3
 			break;
 		default: std::cerr<<"Touche non gérée "<<key<<std::endl;
 	}
@@ -119,7 +108,6 @@ int main(int /*argc*/, char** /*argv*/)
 	glfwSetMouseButtonCallback(window, onMouseButton);
 
 	std::cout<<"Engine init"<<std::endl;
-	// TO DO EX01 part 2
 	myEngine.mode2D = false; // Set engine to 3D mode
 	myEngine.initGL();
 	onWindowResized(window,WINDOW_WIDTH,WINDOW_HEIGHT);
@@ -137,10 +125,8 @@ int main(int /*argc*/, char** /*argv*/)
 		/* Render begins here */
 		glClearColor(0.f,0.5f,0.5f,0.0f);
 
-		// TO DO EX01 part 2
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
-		// TO DO EX01 part 3
 
 		/* Fix camera position */
 		myEngine.mvMatrixStack.loadIdentity();
