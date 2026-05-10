@@ -13,10 +13,10 @@ IndexedMesh* sphere;
 IndexedMesh* cyl;
 IndexedMesh* cube;
 
-float rr {};
-float sx {};
-float sr {}; 
-float size_grid {/*rails.size_grid*/};
+float rr {0.5f};
+float sx {0.5f};
+float sr {1.f}; 
+float size_grid {10.f};
 
 void initScene() {
 	std::vector<float> points {0.0,0.0,0.0};
@@ -32,8 +32,8 @@ void initScene() {
 	repere = createRepere(10.0f);
 	repere->createVAO(); // Creation de l'objet dans OpenGL
 
-	// Un cylindre de hauteur 20 et de rayon 5
-	cyl = basicCylinder(20.0,5.);
+	// Un cylindre de hauteur 1 et de rayon 1
+	cyl = basicCylinder(1.f,1.f);
 	cyl->createVAO(); // Creation de l'objet dans OpenGL
 
 	// Un cube de taille 1
@@ -42,12 +42,34 @@ void initScene() {
 }
 
 void rails_straight() {
+	// Les rails
 	myEngine.mvMatrixStack.pushMatrix();
+		myEngine.mvMatrixStack.addTranslation({3.f, 5.f, sr / 2 + 2 * rr});
 		myEngine.mvMatrixStack.addHomothety({sr, size_grid, sr});
 		myEngine.updateMvMatrix();
 		myEngine.setFlatColor(0.5,0.5,0.5);
 		cube->draw();
 	myEngine.mvMatrixStack.popMatrix();
+
+	myEngine.mvMatrixStack.pushMatrix();
+		myEngine.mvMatrixStack.addTranslation({7.f, 5.f, sr / 2 + 2 * rr});
+		myEngine.mvMatrixStack.addHomothety({sr, size_grid, sr});
+		myEngine.updateMvMatrix();
+		myEngine.setFlatColor(0.5,0.5,0.5);
+		cube->draw();
+	myEngine.mvMatrixStack.popMatrix();
+
+	// Les balasts
+	for (int i {}; i < 5; i++) {
+		myEngine.mvMatrixStack.pushMatrix();
+			myEngine.mvMatrixStack.addTranslation({5.f, (sx + rr) + i * (2.0f * sx + 2.0f * rr), rr});
+			myEngine.mvMatrixStack.addRotation(M_PI / 2, {0.f, 1.f, 0.f});
+			myEngine.mvMatrixStack.addHomothety({rr, rr, 6.f});
+			myEngine.updateMvMatrix();
+			myEngine.setFlatColor(1.f,0.7,0.f);
+			cyl->draw();
+		myEngine.mvMatrixStack.popMatrix();
+	}
 }
 
 void rails_curved() {
@@ -61,4 +83,6 @@ void drawScene() {
 
 	ground.drawShape();
 	repere->draw();
+
+	rails_straight();
 }
