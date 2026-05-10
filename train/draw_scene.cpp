@@ -62,9 +62,9 @@ void rails_straight() {
 	// Les balasts
 	for (int i {}; i < 5; i++) {
 		myEngine.mvMatrixStack.pushMatrix();
-			myEngine.mvMatrixStack.addTranslation({5.f, (sx + rr) + i * (2.0f * sx + 2.0f * rr), rr});
-			myEngine.mvMatrixStack.addRotation(M_PI / 2, {0.f, 1.f, 0.f});
-			myEngine.mvMatrixStack.addHomothety({rr, rr, 6.f});
+			myEngine.mvMatrixStack.addTranslation({8.f, (sx + rr) + i * (2.0f * sx + 2.0f * rr), rr});
+			myEngine.mvMatrixStack.addRotation(M_PI / 2, {0.f, 0.f, 1.f});
+			myEngine.mvMatrixStack.addHomothety({rr, 6.f, rr});
 			myEngine.updateMvMatrix();
 			myEngine.setFlatColor(1.f,0.7,0.f);
 			cyl->draw();
