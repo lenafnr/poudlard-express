@@ -73,13 +73,12 @@ void rails_straight() {
 }
 
 void rails_curved() {
-	for (int i{}; i < 3; i++) {
+	// Les balasts
+    for (int i{1}; i < 4; i++) {
+		float teta = M_PI / 8.f * i;
 		myEngine.mvMatrixStack.pushMatrix();
-			// Coordonnées polaires (x = r * cos(teta) et y = r * sin(teta))
-			float teta = M_PI / 6.f * i;
-			float x_i = 5.f * cos(teta);
-			float y_i = 5.f * sin(teta);
-			myEngine.mvMatrixStack.addTranslation({x_i, y_i, rr});
+			myEngine.mvMatrixStack.addRotation(teta - M_PI / 2, {0.f, 0.f, 1.f});
+			myEngine.mvMatrixStack.addTranslation({0.f, 5.f, rr});
 			myEngine.mvMatrixStack.addHomothety({rr, 6.f, rr});
 			myEngine.updateMvMatrix();
 			myEngine.setFlatColor(1.f, 0.7f, 0.f);
@@ -87,6 +86,7 @@ void rails_curved() {
 		myEngine.mvMatrixStack.popMatrix();
 	}
 }
+
 
 void drawScene() {
 	glPointSize(10.0);
