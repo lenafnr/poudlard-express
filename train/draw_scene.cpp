@@ -73,7 +73,19 @@ void rails_straight() {
 }
 
 void rails_curved() {
-
+	for (int i{}; i < 3; i++) {
+		myEngine.mvMatrixStack.pushMatrix();
+			// Coordonnées polaires (x = r * cos(teta) et y = r * sin(teta))
+			float teta = M_PI / 6.f * i;
+			float x_i = 5.f * cos(teta);
+			float y_i = 5.f * sin(teta);
+			myEngine.mvMatrixStack.addTranslation({x_i, y_i, rr});
+			myEngine.mvMatrixStack.addHomothety({rr, 6.f, rr});
+			myEngine.updateMvMatrix();
+			myEngine.setFlatColor(1.f, 0.7f, 0.f);
+			cyl->draw();
+		myEngine.mvMatrixStack.popMatrix();
+	}
 }
 
 void drawScene() {
@@ -84,5 +96,5 @@ void drawScene() {
 	ground.drawShape();
 	repere->draw();
 
-	rails_straight();
+	rails_curved();
 }
