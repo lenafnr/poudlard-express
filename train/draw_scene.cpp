@@ -8,6 +8,7 @@ float dist_zoom {30.0};      // Distance between origin and viewpoint
 GLBI_Engine myEngine;
 GLBI_Set_Of_Points somePoints(3);
 GLBI_Convex_2D_Shape ground{3};
+// GLBI_Convex_2D_Shape arc_of_cirlce{};
 StandardMesh* repere = NULL;
 IndexedMesh* sphere;
 IndexedMesh* cyl;
@@ -26,8 +27,21 @@ void initScene() {
 								 100.0,-100.0,0.0,
 								 100.0,100.0,0.0,
 								 -100.0,100.0,0.0};
+
+	// std::vector<float> baseArcOfCircle{};
+	// for (int i{}; i < 100; i++) {
+	//  trouver relations avec angles
+	// 	baseArcOfCircle.push_back(x0);
+	// 	baseArcOfCircle.push_back(y0);
+	// 	baseArcOfCircle.push_back(x1);
+	// 	baseArcOfCircle.push_back(y1);
+	// }
+
 	ground.initShape(baseCarre);
 	ground.changeNature(GL_TRIANGLE_FAN);
+
+	// arc_of_cirlce.initShape(baseArcOfCircle);
+	// arc_of_cirlce.changeNature(GL_TRIANGLE_FAN);
 
 	repere = createRepere(10.0f);
 	repere->createVAO(); // Creation de l'objet dans OpenGL
