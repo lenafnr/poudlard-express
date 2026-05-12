@@ -28,15 +28,6 @@ void initScene() {
 								 100.0,100.0,0.0,
 								 -100.0,100.0,0.0};
 
-	// std::vector<float> baseArcOfCircle{};
-	// for (int i{}; i < 100; i++) {
-	//  trouver relations avec angles
-	// 	baseArcOfCircle.push_back(x0);
-	// 	baseArcOfCircle.push_back(y0);
-	// 	baseArcOfCircle.push_back(x1);
-	// 	baseArcOfCircle.push_back(y1);
-	// }
-
 	ground.initShape(baseCarre);
 	ground.changeNature(GL_TRIANGLE_FAN);
 
@@ -87,13 +78,37 @@ void rails_straight() {
 }
 
 void rails_curved() {
+	// Le rail intérieur
+	for (int i{}; i < 101; i++) {
+		float teta = M_PI / 200 * i;
+		myEngine.mvMatrixStack.pushMatrix();
+			myEngine.mvMatrixStack.addRotation(teta - M_PI / 2, {0.f, 0.f, 1.f});
+			myEngine.mvMatrixStack.addTranslation({0.f, 5.f, 4 * rr});
+			myEngine.mvMatrixStack.addHomothety({sr, sr, sr});
+			myEngine.updateMvMatrix();
+			myEngine.setFlatColor(0.5,0.5,0.5);
+			cyl->draw();
+		myEngine.mvMatrixStack.popMatrix();
+	}
+	// Le rail extérieur
+	for (int i{}; i < 101; i++) {
+		float teta = M_PI / 200 * i;
+		myEngine.mvMatrixStack.pushMatrix();
+			myEngine.mvMatrixStack.addRotation(teta - M_PI / 2, {0.f, 0.f, 1.f});
+			myEngine.mvMatrixStack.addTranslation({0.f, 9.f, 4 * rr});
+			myEngine.mvMatrixStack.addHomothety({sr, sr, sr});
+			myEngine.updateMvMatrix();
+			myEngine.setFlatColor(0.5,0.5,0.5);
+			cyl->draw();
+		myEngine.mvMatrixStack.popMatrix();
+	}
 	// Les balasts
     for (int i{1}; i < 4; i++) {
 		float teta = M_PI / 8.f * i;
 		myEngine.mvMatrixStack.pushMatrix();
 			myEngine.mvMatrixStack.addRotation(teta - M_PI / 2, {0.f, 0.f, 1.f});
-			myEngine.mvMatrixStack.addTranslation({0.f, 5.f, rr});
-			myEngine.mvMatrixStack.addHomothety({rr, 6.f, rr});
+			myEngine.mvMatrixStack.addTranslation({0.f, 4.f, rr});
+			myEngine.mvMatrixStack.addHomothety({rr, 7.f, rr});
 			myEngine.updateMvMatrix();
 			myEngine.setFlatColor(1.f, 0.7f, 0.f);
 			cyl->draw();
