@@ -19,5 +19,8 @@ extern GLBI_Engine myEngine;
 
 void initScene();
 
+void rails_straight();
+void rails_curved();
+
 void drawScene();
 
