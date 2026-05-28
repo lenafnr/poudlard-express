@@ -13,10 +13,14 @@ static const float Z_FAR {500.f};
 extern float angle_theta;      // Angle between x axis and viewpoint
 extern float angle_phy  ;      // Angle between z axis and viewpoint
 extern float dist_zoom  ;      // Distance between origin and viewpoint
-
+extern float rr ;
+extern float sx;
+extern float sr;
+extern float size_grid;
 /* OpenGL Engine */
 extern GLBI_Engine myEngine;
-
+extern IndexedMesh* cube;
+extern IndexedMesh* cyl;
 void initScene();
 
 void rails_straight();
