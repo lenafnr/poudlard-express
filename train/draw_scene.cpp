@@ -1,5 +1,6 @@
 #include "draw_scene.hpp"
 #include "rails.hpp"
+#include "train.hpp"
 
 /// Camera parameters
 float angle_theta {45.0};      // Angle between x axis and viewpoint
@@ -42,6 +43,10 @@ void initScene() {
 	// Un cube de taille 1
 	cube = basicCube(1.f);
 	cube->createVAO(); // Creation de l'objet dans OpenGL
+
+	// Une sphère de taille 1
+	sphere = basicSphere(1.f);
+	sphere->createVAO(); // Creation de l'objet dans OpenGL
 }
 
 void drawScene() {
@@ -52,5 +57,5 @@ void drawScene() {
 	ground.drawShape();
 	repere->draw();
 
-	rails_curved();
+	train();
 }

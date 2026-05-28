@@ -19,6 +19,7 @@ extern float sr;
 extern float size_grid;
 /* OpenGL Engine */
 extern GLBI_Engine myEngine;
+extern IndexedMesh* sphere;
 extern IndexedMesh* cube;
 extern IndexedMesh* cyl;
 void initScene();
