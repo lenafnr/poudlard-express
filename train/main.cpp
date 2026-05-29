@@ -55,6 +55,13 @@ void onKey(GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods
 			case GLFW_KEY_RIGHT :
 				angle_theta -= 1.0;
 			break;
+		case GLFW_KEY_Z :
+			dist_zoom += 10;
+			break;
+		case GLFW_KEY_R :
+			dist_zoom -= 10;
+			break;
+
 		default: std::cerr<<"Touche non gérée "<<key<<std::endl;
 	}
 
