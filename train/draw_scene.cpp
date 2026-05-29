@@ -1,5 +1,6 @@
 #include "draw_scene.hpp"
 #include "rails.hpp"
+#include "station.hpp"
 
 /// Camera parameters
 float angle_theta {45.0};      // Angle between x axis and viewpoint
@@ -52,5 +53,5 @@ void drawScene() {
 	ground.drawShape();
 	repere->draw();
 
-	rails_curved();
+	station();
 }
