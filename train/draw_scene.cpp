@@ -8,6 +8,7 @@ float angle_phy {30.0};      // Angle between z axis and viewpoint
 float dist_zoom {30.0};      // Distance between origin and viewpoint
 
 GLBI_Engine myEngine;
+GLBI_Texture myTexture;
 GLBI_Set_Of_Points somePoints(3);
 GLBI_Convex_2D_Shape ground{3};
 // GLBI_Convex_2D_Shape arc_of_cirlce{};
@@ -21,7 +22,7 @@ float sx {0.5f};
 float sr {1.f}; 
 float size_grid {10.f};
 
-void initScene() {
+void initScene(int& x, int&y, int&n, unsigned char* image) {
 	std::vector<float> points {0.0,0.0,0.0};
 	somePoints.initSet(points,1.0,1.0,1.0);
 
@@ -47,11 +48,19 @@ void initScene() {
 	// Une sphère de taille 1
 	sphere = basicSphere(1.f);
 	sphere->createVAO(); // Creation de l'objet dans OpenGL
+
+	myTexture.createTexture();
+	myTexture.attachTexture();
+	myTexture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	myTexture.loadImage(x, y, n, image);
+	myTexture.detachTexture();
+	glActiveTexture(GL_TEXTURE0);
 }
 
 void drawScene() {
 	glPointSize(10.0);
 
+	myEngine.activateTexturing(false);
 	myEngine.setFlatColor(0.2,0.0,0.0);
 
 	ground.drawShape();

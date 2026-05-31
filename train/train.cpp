@@ -117,16 +117,24 @@ void body() {
             myEngine.mvMatrixStack.addTranslation({0.6f * size_grid, (0.3f + incr_y) * size_grid, 0.4f * size_grid});
             myEngine.mvMatrixStack.addHomothety({0.6f * size_grid, 0.01f * size_grid, 0.03f * size_grid});
             myEngine.updateMvMatrix();
+            myEngine.activateTexturing(true);
+            myTexture.attachTexture();
             myEngine.setFlatColor(1.f,1.f,0.f);
             cube->draw();
+            myTexture.detachTexture();
+            myEngine.activateTexturing(false);
         myEngine.mvMatrixStack.popMatrix();
         for (float i{}; i < 4; i++) {
             myEngine.mvMatrixStack.pushMatrix();
                 myEngine.mvMatrixStack.addTranslation({(0.3f + incr_x) * size_grid, (0.3f + incr_y) * size_grid, 0.4f * size_grid});
                 myEngine.mvMatrixStack.addHomothety({0.04f * size_grid, 0.01f * size_grid, 0.04f * size_grid});
                 myEngine.updateMvMatrix();
+                myEngine.activateTexturing(true);
+                myTexture.attachTexture();
                 myEngine.setFlatColor(1.f,1.f,0.f);
                 sphere->draw();
+                myTexture.detachTexture();
+                myEngine.activateTexturing(false);
             myEngine.mvMatrixStack.popMatrix();
 
             incr_x += 0.2f;
