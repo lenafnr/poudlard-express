@@ -9,6 +9,7 @@ void wheels() {
         for (float i{}; i <= 0.3f; i+=0.3f) {
             myEngine.mvMatrixStack.pushMatrix();
                 myEngine.mvMatrixStack.addTranslation({(0.2f + i) * size_grid, (0.25f + j) * size_grid, big_radius});
+                // Pour rotation de la rangée de gauche
                 if (j > 0.f)
                     myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 0.f, 1.f});
                 myEngine.mvMatrixStack.addHomothety({big_radius, 0.05f * size_grid, big_radius});
@@ -173,7 +174,43 @@ void body() {
     }
 }
 
+void smoke() {
+    float center_grid {0.5f * size_grid};
+    float incr_x {};
+    float incr_z {};
+    for (float i{}; i < 2; i++) {
+        myEngine.mvMatrixStack.pushMatrix();
+            myEngine.mvMatrixStack.addTranslation({(0.82f + incr_x) * size_grid, center_grid, 0.75f * size_grid});
+            myEngine.mvMatrixStack.addHomothety({0.1f * size_grid, 0.07f * size_grid, 0.07f * size_grid});
+            myEngine.updateMvMatrix();
+            myEngine.setFlatColor(1, 1, 1);
+            sphere->draw();
+        myEngine.mvMatrixStack.popMatrix();
+
+        incr_x=-0.18f;
+    }
+    for (float i{}; i < 2; i++) {
+        myEngine.mvMatrixStack.pushMatrix();
+            myEngine.mvMatrixStack.addTranslation({0.7f * size_grid, center_grid, (0.72f + incr_z) * size_grid});
+            myEngine.mvMatrixStack.addHomothety({0.08f * size_grid, 0.07f * size_grid, 0.07f * size_grid});
+            myEngine.updateMvMatrix();
+            myEngine.setFlatColor(1, 1, 1);
+            sphere->draw();
+        myEngine.mvMatrixStack.popMatrix();
+
+        incr_z=0.06f;
+    }
+    myEngine.mvMatrixStack.pushMatrix();
+            myEngine.mvMatrixStack.addTranslation({0.55f * size_grid, center_grid, 0.8f * size_grid});
+            myEngine.mvMatrixStack.addHomothety({0.1f * size_grid, 0.07f * size_grid, 0.07f * size_grid});
+            myEngine.updateMvMatrix();
+            myEngine.setFlatColor(1, 1, 1);
+            sphere->draw();
+        myEngine.mvMatrixStack.popMatrix();
+}
+
 void train() {
     wheels();
     body();
+    smoke();
 }
