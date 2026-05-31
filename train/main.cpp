@@ -120,7 +120,7 @@ int main(int /*argc*/, char** /*argv*/)
 	if (image == nullptr) {
 		std::cout << "Image non générée\n";
 	}
-
+	n = 4;
 	std::cout<<"Engine init"<<std::endl;
 	myEngine.mode2D = false; // Set engine to 3D mode
 	myEngine.initGL();
