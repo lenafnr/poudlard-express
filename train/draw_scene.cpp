@@ -1,5 +1,7 @@
 #include "draw_scene.hpp"
+#include "tools/stb_image.h"
 #include "rails.hpp"
+#include "train.hpp"
 #include "station.hpp"
 
 /// Camera parameters
@@ -8,6 +10,8 @@ float angle_phy{30.0};	 // Angle between z axis and viewpoint
 float dist_zoom{30.0};	 // Distance between origin and viewpoint
 
 GLBI_Engine myEngine;
+GLBI_Texture textureGold;
+GLBI_Texture textureCloud;
 GLBI_Set_Of_Points somePoints(3);
 GLBI_Convex_2D_Shape ground{3};
 GLBI_Convex_2D_Shape arc{3};
@@ -46,6 +50,30 @@ void initScene()
 	// Un cube de taille 1
 	cube = basicCube(1.f);
 	cube->createVAO(); // Creation de l'objet dans OpenGL
+
+	// Une sphère de taille 1
+	sphere = basicSphere(1.f);
+	sphere->createVAO(); // Creation de l'objet dans OpenGL
+		// Gold
+	int x_g, y_g, n_g;
+    unsigned char* img_gold = stbi_load("../assets/textures/gold.jpg", &x_g, &y_g, &n_g, 4);
+	textureGold.createTexture();
+	textureGold.attachTexture();
+	textureGold.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	textureGold.loadImage(x_g, y_g, 4, img_gold); // On force n = 4 ici
+	textureGold.detachTexture();
+	stbi_image_free(img_gold);
+		// Clouds
+	int x_c, y_c, n_c;
+    unsigned char* img_cloud = stbi_load("../assets/textures/cloud.jpg", &x_c, &y_c, &n_c, 4);
+	textureCloud.createTexture();
+	textureCloud.attachTexture();
+	textureCloud.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	textureCloud.loadImage(x_c, y_c, 4, img_cloud); // On force n = 4 ici
+	textureCloud.detachTexture();
+	stbi_image_free(img_cloud);
+	
+	glActiveTexture(GL_TEXTURE0);
 
 	// Une sphere de taille 1
 	sphere = basicSphere(1.f);
@@ -88,10 +116,11 @@ void drawScene()
 {
 	glPointSize(10.0);
 
-	myEngine.setFlatColor(0.2, 0.0, 0.0);
+	myEngine.activateTexturing(false);
+	myEngine.setFlatColor(0.2,0.0,0.0);
 
 	ground.drawShape();
 	repere->draw();
 
-	station();
+	train();
 }

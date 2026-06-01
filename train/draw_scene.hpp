@@ -1,6 +1,8 @@
 #pragma once
 
 #include "glbasimac/glbi_engine.hpp"
+#include "glbasimac/glbi_texture.hpp"
+#include "glbasimac/glbi_engine.hpp"
 #include "glbasimac/glbi_set_of_points.hpp"
 #include "glbasimac/glbi_convex_2D_shape.hpp"
 #include "tools/basic_mesh.hpp"
@@ -18,7 +20,10 @@ extern float sx;
 extern float sr;
 extern float size_grid;
 /* OpenGL Engine */
+extern GLBI_Texture textureGold;
+extern GLBI_Texture textureCloud;
 extern GLBI_Engine myEngine;
+extern IndexedMesh* sphere;
 extern IndexedMesh* cube;
 extern IndexedMesh* cyl;
 extern IndexedMesh* sphere;

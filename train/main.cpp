@@ -1,8 +1,13 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
+#include "glbasimac/glbi_engine.hpp"
+#include "glbasimac/glbi_texture.hpp"
 #include "draw_scene.hpp"
 #include "tools/shaders.hpp"
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "tools/stb_image.h"
 #include <iostream>
 
 using namespace glbasimac;
@@ -164,7 +169,6 @@ int main(int /*argc*/, char** /*argv*/)
 			elapsedTime = glfwGetTime() - startTime;
 		}
 	}
-
 	glfwTerminate();
 	return 0;
 }

@@ -41,7 +41,7 @@ void rails_curved() {
 			myEngine.mvMatrixStack.addHomothety({sr, sr, sr});
 			myEngine.updateMvMatrix();
 			myEngine.setFlatColor(0.5,0.5,0.5);
-			cyl->draw();
+			cube->draw();
 		myEngine.mvMatrixStack.popMatrix();
 	}
 	// Le rail extérieur
@@ -53,7 +53,7 @@ void rails_curved() {
 			myEngine.mvMatrixStack.addHomothety({sr, sr, sr});
 			myEngine.updateMvMatrix();
 			myEngine.setFlatColor(0.5,0.5,0.5);
-			cyl->draw();
+			cube->draw();
 		myEngine.mvMatrixStack.popMatrix();
 	}
 	// Les balasts
