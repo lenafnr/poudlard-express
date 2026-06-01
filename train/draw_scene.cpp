@@ -12,6 +12,7 @@ float dist_zoom{30.0};	 // Distance between origin and viewpoint
 GLBI_Engine myEngine;
 GLBI_Texture textureGold;
 GLBI_Texture textureCloud;
+GLBI_Texture texturePlatform;
 GLBI_Set_Of_Points somePoints(3);
 GLBI_Convex_2D_Shape ground{3};
 GLBI_Convex_2D_Shape arc{3};
@@ -92,7 +93,7 @@ void initScene()
 	textureGold.createTexture();
 	textureGold.attachTexture();
 	textureGold.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	textureGold.loadImage(x_g, y_g, 4, img_gold); // On force n = 4 ici
+	textureGold.loadImage(x_g, y_g, 4, img_gold);
 	textureGold.detachTexture();
 	stbi_image_free(img_gold);
 		// Clouds
@@ -101,13 +102,20 @@ void initScene()
 	textureCloud.createTexture();
 	textureCloud.attachTexture();
 	textureCloud.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	textureCloud.loadImage(x_c, y_c, 4, img_cloud); // On force n = 4 ici
+	textureCloud.loadImage(x_c, y_c, 4, img_cloud);
 	textureCloud.detachTexture();
 	stbi_image_free(img_cloud);
+	// 9 3/4
+	int x_p, y_p, n_p;
+    unsigned char* img_platform = stbi_load("../assets/textures/platform.jpg", &x_p, &y_p, &n_p, 4);
+	texturePlatform.createTexture();
+	texturePlatform.attachTexture();
+	texturePlatform.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	texturePlatform.loadImage(x_p, y_p, 4, img_platform);
+	texturePlatform.detachTexture();
+	stbi_image_free(img_platform);
 	
 	glActiveTexture(GL_TEXTURE0);
-
-
 }
 
 void drawScene()

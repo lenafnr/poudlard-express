@@ -161,11 +161,15 @@ void pannelStation()
     }
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.799f * U, 0.5f * U, 0.575f * U});
-    myEngine.mvMatrixStack.addHomothety({0.01f * U, 0.1742f * U, 0.1742f * U});
-    myEngine.updateMvMatrix();
-    myEngine.setFlatColor(0.929f, 0.831f, 0.408f);
-    sphere->draw();
+        myEngine.mvMatrixStack.addTranslation({0.799f * U, 0.5f * U, 0.575f * U});
+        myEngine.mvMatrixStack.addHomothety({0.01f * U, 0.1742f * U, 0.1742f * U});
+        myEngine.updateMvMatrix();
+        myEngine.activateTexturing(true);
+        texturePlatform.attachTexture();
+        myEngine.setFlatColor(1.f,0.f,0.f);
+        sphere->draw();
+        texturePlatform.detachTexture();
+        myEngine.activateTexturing(false);
     myEngine.mvMatrixStack.popMatrix();
 }
 
