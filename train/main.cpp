@@ -112,22 +112,13 @@ int main(int /*argc*/, char** /*argv*/)
 	glfwSetKeyCallback(window, onKey);
 	glfwSetMouseButtonCallback(window, onMouseButton);
 
-	std::string filename = "../assets/textures/gold.jpg";
-	int x, y, n; // générer par la fonction
-	// c_str le transforme en pointeur
-	unsigned char* image = stbi_load(filename.c_str(), &x, &y, &n, 4);
-
-	if (image == nullptr) {
-		std::cout << "Image non générée\n";
-	}
-	n = 4;
 	std::cout<<"Engine init"<<std::endl;
 	myEngine.mode2D = false; // Set engine to 3D mode
 	myEngine.initGL();
 	onWindowResized(window,WINDOW_WIDTH,WINDOW_HEIGHT);
 	CHECK_GL;
 
-	initScene(x, y, n, image);
+	initScene();
 	double elapsedTime{0.0};
 
 	/* Loop until the user closes the window */
@@ -171,7 +162,6 @@ int main(int /*argc*/, char** /*argv*/)
 			elapsedTime = glfwGetTime() - startTime;
 		}
 	}
-	stbi_image_free(image);
 	glfwTerminate();
 	return 0;
 }

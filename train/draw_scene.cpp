@@ -1,4 +1,5 @@
 #include "draw_scene.hpp"
+#include "tools/stb_image.h"
 #include "rails.hpp"
 #include "train.hpp"
 
@@ -22,7 +23,7 @@ float sx {0.5f};
 float sr {1.f}; 
 float size_grid {10.f};
 
-void initScene(int& x, int&y, int&n, unsigned char* image) {
+void initScene() {
 	std::vector<float> points {0.0,0.0,0.0};
 	somePoints.initSet(points,1.0,1.0,1.0);
 
@@ -49,11 +50,15 @@ void initScene(int& x, int&y, int&n, unsigned char* image) {
 	sphere = basicSphere(1.f);
 	sphere->createVAO(); // Creation de l'objet dans OpenGL
 
-	myTexture.createTexture();
-	myTexture.attachTexture();
-	myTexture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myTexture.loadImage(x, y, n, image);
+	int x_g, y_g, n_g;
+    unsigned char* img_gold = stbi_load("../assets/textures/gold.jpg", &x_g, &y_g, &n_g, 4);
+    myTexture.createTexture();
+    myTexture.attachTexture();
+    myTexture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	myTexture.loadImage(x_g, y_g, 4, img_gold); // On force n = 4 ici
 	myTexture.detachTexture();
+	stbi_image_free(img_gold);
+
 	glActiveTexture(GL_TEXTURE0);
 }
 

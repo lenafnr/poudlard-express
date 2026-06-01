@@ -20,12 +20,12 @@ extern float sx;
 extern float sr;
 extern float size_grid;
 /* OpenGL Engine */
-extern GLBI_Texture myTexture;;
+extern GLBI_Texture myTexture;
 extern GLBI_Engine myEngine;
 extern IndexedMesh* sphere;
 extern IndexedMesh* cube;
 extern IndexedMesh* cyl;
-void initScene(int& x, int&y, int&n, unsigned char* image);
+void initScene();
 
 void rails_straight();
 void rails_curved();
