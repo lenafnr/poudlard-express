@@ -21,6 +21,9 @@ extern float size_grid;
 extern GLBI_Engine myEngine;
 extern IndexedMesh* cube;
 extern IndexedMesh* cyl;
+extern IndexedMesh* sphere;
+extern GLBI_Convex_2D_Shape arc;
+
 void initScene();
 
 void rails_straight();

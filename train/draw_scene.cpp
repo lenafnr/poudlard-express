@@ -3,32 +3,35 @@
 #include "station.hpp"
 
 /// Camera parameters
-float angle_theta {45.0};      // Angle between x axis and viewpoint
-float angle_phy {30.0};      // Angle between z axis and viewpoint
-float dist_zoom {30.0};      // Distance between origin and viewpoint
+float angle_theta{45.0}; // Angle between x axis and viewpoint
+float angle_phy{30.0};	 // Angle between z axis and viewpoint
+float dist_zoom{30.0};	 // Distance between origin and viewpoint
 
 GLBI_Engine myEngine;
 GLBI_Set_Of_Points somePoints(3);
 GLBI_Convex_2D_Shape ground{3};
-// GLBI_Convex_2D_Shape arc_of_cirlce{};
-StandardMesh* repere = NULL;
-IndexedMesh* sphere;
-IndexedMesh* cyl;
-IndexedMesh* cube;
+GLBI_Convex_2D_Shape arc{3};
 
-float rr {0.5f};
-float sx {0.5f};
-float sr {1.f}; 
-float size_grid {10.f};
+StandardMesh *repere = NULL;
+IndexedMesh *sphere;
+IndexedMesh *cyl;
+IndexedMesh *cube;
+IndexedMesh *disk;
 
-void initScene() {
-	std::vector<float> points {0.0,0.0,0.0};
-	somePoints.initSet(points,1.0,1.0,1.0);
+float rr{0.5f};
+float sx{0.5f};
+float sr{1.f};
+float size_grid{10.f};
 
-	std::vector<float> baseCarre{-100.0,-100.0,0.0,
-								 100.0,-100.0,0.0,
-								 100.0,100.0,0.0,
-								 -100.0,100.0,0.0};
+void initScene()
+{
+	std::vector<float> points{0.0, 0.0, 0.0};
+	somePoints.initSet(points, 1.0, 1.0, 1.0);
+
+	std::vector<float> baseCarre{-100.0, -100.0, 0.0,
+								 100.0, -100.0, 0.0,
+								 100.0, 100.0, 0.0,
+								 -100.0, 100.0, 0.0};
 
 	ground.initShape(baseCarre);
 	ground.changeNature(GL_TRIANGLE_FAN);
@@ -37,18 +40,55 @@ void initScene() {
 	repere->createVAO(); // Creation de l'objet dans OpenGL
 
 	// Un cylindre de hauteur 1 et de rayon 1
-	cyl = basicCylinder(1.f,1.f);
+	cyl = basicCylinder(1.f, 1.f);
 	cyl->createVAO(); // Creation de l'objet dans OpenGL
 
 	// Un cube de taille 1
 	cube = basicCube(1.f);
 	cube->createVAO(); // Creation de l'objet dans OpenGL
+
+	// Une sphere de taille 1
+	sphere = basicSphere(1.f);
+	sphere->createVAO();
+
+	// 1/4 arc
+	std::vector<float> rail;
+	float R = 1.0f;
+	float stroke = 0.1f;
+	int N = 100;
+
+	float start = 0.f;
+	float end = M_PI / 2.f;
+
+	for (int i = 0; i <= N; i++)
+	{
+		float t = (float)i / N;
+		float a = start + t * (end - start);
+
+		float x1 = R * cos(a);
+		float y1 = R * sin(a);
+
+		float x2 = (R - stroke) * cos(a);
+		float y2 = (R - stroke) * sin(a);
+
+		rail.push_back(x1);
+		rail.push_back(y1);
+		rail.push_back(0.f);
+
+		rail.push_back(x2);
+		rail.push_back(y2);
+		rail.push_back(0.f);
+	}
+
+	arc.initShape(rail);
+	arc.changeNature(GL_TRIANGLE_STRIP);
 }
 
-void drawScene() {
+void drawScene()
+{
 	glPointSize(10.0);
 
-	myEngine.setFlatColor(0.2,0.0,0.0);
+	myEngine.setFlatColor(0.2, 0.0, 0.0);
 
 	ground.drawShape();
 	repere->draw();
