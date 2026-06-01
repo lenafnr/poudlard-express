@@ -162,7 +162,8 @@ void pannelStation()
 
     myEngine.mvMatrixStack.pushMatrix();
         myEngine.mvMatrixStack.addTranslation({0.799f * U, 0.5f * U, 0.575f * U});
-        myEngine.mvMatrixStack.addHomothety({0.01f * U, 0.1742f * U, 0.1742f * U});
+        myEngine.mvMatrixStack.addRotation(-M_PI/2, {1,0,0});
+        myEngine.mvMatrixStack.addHomothety({0.005f * U, 0.1742f * U, 0.1742f * U});
         myEngine.updateMvMatrix();
         myEngine.activateTexturing(true);
         texturePlatform.attachTexture();

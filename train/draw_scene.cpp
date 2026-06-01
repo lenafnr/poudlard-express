@@ -107,7 +107,7 @@ void initScene()
 	stbi_image_free(img_cloud);
 	// 9 3/4
 	int x_p, y_p, n_p;
-    unsigned char* img_platform = stbi_load("../assets/textures/platform.jpg", &x_p, &y_p, &n_p, 4);
+    unsigned char* img_platform = stbi_load("../assets/textures/plateform.jpg", &x_p, &y_p, &n_p, 4);
 	texturePlatform.createTexture();
 	texturePlatform.attachTexture();
 	texturePlatform.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
