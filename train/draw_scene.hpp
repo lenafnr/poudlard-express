@@ -20,7 +20,8 @@ extern float sx;
 extern float sr;
 extern float size_grid;
 /* OpenGL Engine */
-extern GLBI_Texture myTexture;
+extern GLBI_Texture textureGold;
+extern GLBI_Texture textureCloud;
 extern GLBI_Engine myEngine;
 extern IndexedMesh* sphere;
 extern IndexedMesh* cube;

@@ -118,10 +118,10 @@ void body() {
             myEngine.mvMatrixStack.addHomothety({0.6f * size_grid, 0.01f * size_grid, 0.03f * size_grid});
             myEngine.updateMvMatrix();
             myEngine.activateTexturing(true);
-            myTexture.attachTexture();
+            textureGold.attachTexture();
             myEngine.setFlatColor(1.f,1.f,0.f);
             cube->draw();
-            myTexture.detachTexture();
+            textureGold.detachTexture();
             myEngine.activateTexturing(false);
         myEngine.mvMatrixStack.popMatrix();
         for (float i{}; i < 4; i++) {
@@ -130,10 +130,10 @@ void body() {
                 myEngine.mvMatrixStack.addHomothety({0.04f * size_grid, 0.01f * size_grid, 0.04f * size_grid});
                 myEngine.updateMvMatrix();
                 myEngine.activateTexturing(true);
-                myTexture.attachTexture();
+                textureGold.attachTexture();
                 myEngine.setFlatColor(1.f,1.f,0.f);
                 sphere->draw();
-                myTexture.detachTexture();
+                textureGold.detachTexture();
                 myEngine.activateTexturing(false);
             myEngine.mvMatrixStack.popMatrix();
 
@@ -191,8 +191,12 @@ void smoke() {
             myEngine.mvMatrixStack.addTranslation({(0.82f + incr_x) * size_grid, center_grid, 0.75f * size_grid});
             myEngine.mvMatrixStack.addHomothety({0.1f * size_grid, 0.07f * size_grid, 0.07f * size_grid});
             myEngine.updateMvMatrix();
-            myEngine.setFlatColor(1, 1, 1);
+            myEngine.activateTexturing(true);
+            textureCloud.attachTexture();
+            myEngine.setFlatColor(1.f,1.f,0.f);
             sphere->draw();
+            textureCloud.detachTexture();
+            myEngine.activateTexturing(false);
         myEngine.mvMatrixStack.popMatrix();
 
         incr_x=-0.18f;
@@ -202,8 +206,12 @@ void smoke() {
             myEngine.mvMatrixStack.addTranslation({0.7f * size_grid, center_grid, (0.72f + incr_z) * size_grid});
             myEngine.mvMatrixStack.addHomothety({0.08f * size_grid, 0.07f * size_grid, 0.07f * size_grid});
             myEngine.updateMvMatrix();
-            myEngine.setFlatColor(1, 1, 1);
+            myEngine.activateTexturing(true);
+            textureCloud.attachTexture();
+            myEngine.setFlatColor(1.f,1.f,0.f);
             sphere->draw();
+            textureCloud.detachTexture();
+            myEngine.activateTexturing(false);
         myEngine.mvMatrixStack.popMatrix();
 
         incr_z=0.06f;
@@ -212,8 +220,12 @@ void smoke() {
             myEngine.mvMatrixStack.addTranslation({0.55f * size_grid, center_grid, 0.8f * size_grid});
             myEngine.mvMatrixStack.addHomothety({0.1f * size_grid, 0.07f * size_grid, 0.07f * size_grid});
             myEngine.updateMvMatrix();
-            myEngine.setFlatColor(1, 1, 1);
+            myEngine.activateTexturing(true);
+            textureCloud.attachTexture();
+            myEngine.setFlatColor(1.f,1.f,0.f);
             sphere->draw();
+            textureCloud.detachTexture();
+            myEngine.activateTexturing(false);
         myEngine.mvMatrixStack.popMatrix();
 }
 
