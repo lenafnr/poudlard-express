@@ -29,6 +29,8 @@ extern IndexedMesh* cube;
 extern IndexedMesh* cyl;
 extern IndexedMesh* sphere;
 extern GLBI_Convex_2D_Shape arc;
+extern GLBI_Convex_2D_Shape circle;
+void createCirlce(float r);
 
 void initScene();
 

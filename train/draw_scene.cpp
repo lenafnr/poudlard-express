@@ -16,6 +16,28 @@ GLBI_Texture texturePlatform;
 GLBI_Set_Of_Points somePoints(3);
 GLBI_Convex_2D_Shape ground{3};
 GLBI_Convex_2D_Shape arc{3};
+GLBI_Convex_2D_Shape circle;
+
+std::vector<float> pointCircle {
+};
+
+void createCircle(float r)
+{
+    int segments = 50;
+ 
+    for (int i = 0; i < segments; ++i)
+    {
+        // Calcul de l'angle pour ce segment (en radians)
+        float theta = 2.0f * M_PI * float(i) / float(segments);
+        
+        // Calcul des coordonnées x et y
+        float x = r * std::cos(theta);
+        float y = r * std::sin(theta);
+        
+        pointCircle.push_back(x);
+        pointCircle.push_back(y);
+    }
+}
 
 StandardMesh *repere = NULL;
 IndexedMesh *sphere;
@@ -56,6 +78,10 @@ void initScene()
 	sphere = basicSphere(1.f);
 	sphere->createVAO(); // Creation de l'objet dans OpenGL
 
+	createCircle(1.f);
+	circle.initShape(pointCircle);
+	circle.changeNature(GL_TRIANGLE_FAN);
+	
 	// 1/4 arc
 	std::vector<float> rail;
 	float R = 1.0f;
