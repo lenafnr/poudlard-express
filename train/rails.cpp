@@ -1,5 +1,21 @@
 #include "rails.hpp"
 
+void closedCylinder() {
+	cyl->draw();
+	myEngine.mvMatrixStack.pushMatrix();
+		myEngine.mvMatrixStack.addTranslation({0.f, 0.5f, 0.f});
+		myEngine.mvMatrixStack.addRotation(M_PI/2, {1,0,0});
+		myEngine.updateMvMatrix();
+		circle.drawShape();
+	myEngine.mvMatrixStack.popMatrix();
+	myEngine.mvMatrixStack.pushMatrix();
+		myEngine.mvMatrixStack.addTranslation({0.f, 0.f, 0.f});
+		myEngine.mvMatrixStack.addRotation(M_PI/2, {1,0,0});
+		myEngine.updateMvMatrix();
+		circle.drawShape();
+	myEngine.mvMatrixStack.popMatrix();
+}
+
 void rails_straight() {
 	// Les rails
 	myEngine.mvMatrixStack.pushMatrix();
@@ -26,7 +42,7 @@ void rails_straight() {
 			myEngine.mvMatrixStack.addHomothety({rr, 6.f, rr});
 			myEngine.updateMvMatrix();
 			myEngine.setFlatColor(1.f,0.7,0.f);
-			cyl->draw();
+			closedCylinder();
 		myEngine.mvMatrixStack.popMatrix();
 	}
 }
@@ -65,7 +81,7 @@ void rails_curved() {
 			myEngine.mvMatrixStack.addHomothety({rr, 7.f, rr});
 			myEngine.updateMvMatrix();
 			myEngine.setFlatColor(1.f, 0.7f, 0.f);
-			cyl->draw();
+			closedCylinder();
 		myEngine.mvMatrixStack.popMatrix();
 	}
 }

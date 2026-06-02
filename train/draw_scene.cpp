@@ -154,5 +154,5 @@ void drawScene()
 	ground.drawShape();
 	repere->draw();
 
-	station();
+	rails_straight();
 }
