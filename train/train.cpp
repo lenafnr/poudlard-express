@@ -15,16 +15,7 @@ void wheels() {
                 myEngine.mvMatrixStack.addHomothety({big_radius, 0.05f * size_grid, big_radius});
                 myEngine.updateMvMatrix();
                 myEngine.setFlatColor(0.5,0.5,0.5);
-                cyl->draw();
-            myEngine.mvMatrixStack.popMatrix();
-            myEngine.mvMatrixStack.pushMatrix();
-                myEngine.mvMatrixStack.addTranslation({(0.2f + i) * size_grid, (0.25f + j) * size_grid, big_radius});
-                if (j > 0.f)
-                    myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 0.f, 1.f});
-                myEngine.mvMatrixStack.addHomothety({big_radius, 0.01f, big_radius});
-                myEngine.updateMvMatrix();
-                myEngine.setFlatColor(0.5,0.5,0.5);
-                sphere->draw();
+                closedCylinder();
             myEngine.mvMatrixStack.popMatrix();
         }
     }
@@ -38,16 +29,7 @@ void wheels() {
                 myEngine.mvMatrixStack.addHomothety({little_radius, 0.5f, little_radius});
                 myEngine.updateMvMatrix();
                 myEngine.setFlatColor(0.5,0.5,0.5);
-                cyl->draw();
-            myEngine.mvMatrixStack.popMatrix();
-            myEngine.mvMatrixStack.pushMatrix();
-                myEngine.mvMatrixStack.addTranslation({(0.7f + i) * size_grid, (0.25f + j) * size_grid, little_radius});
-                if (j > 0.f)
-                    myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 0.f, 1.f});
-                myEngine.mvMatrixStack.addHomothety({little_radius, 0.01f, little_radius});
-                myEngine.updateMvMatrix();
-                myEngine.setFlatColor(0.5,0.5,0.5);
-                sphere->draw();
+                closedCylinder();
             myEngine.mvMatrixStack.popMatrix();
         }
     }

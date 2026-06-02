@@ -39,6 +39,22 @@ void createCircle(float r)
     }
 }
 
+void closedCylinder() {
+	cyl->draw();
+	myEngine.mvMatrixStack.pushMatrix();
+		myEngine.mvMatrixStack.addTranslation({0.f, 0.5f, 0.f});
+		myEngine.mvMatrixStack.addRotation(M_PI/2, {1,0,0});
+		myEngine.updateMvMatrix();
+		circle.drawShape();
+	myEngine.mvMatrixStack.popMatrix();
+	myEngine.mvMatrixStack.pushMatrix();
+		myEngine.mvMatrixStack.addTranslation({0.f, 0.f, 0.f});
+		myEngine.mvMatrixStack.addRotation(M_PI/2, {1,0,0});
+		myEngine.updateMvMatrix();
+		circle.drawShape();
+	myEngine.mvMatrixStack.popMatrix();
+}
+
 StandardMesh *repere = NULL;
 IndexedMesh *sphere;
 IndexedMesh *cyl;
@@ -154,5 +170,5 @@ void drawScene()
 	ground.drawShape();
 	repere->draw();
 
-	rails_straight();
+	train();
 }

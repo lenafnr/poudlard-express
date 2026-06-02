@@ -31,7 +31,7 @@ extern IndexedMesh* sphere;
 extern GLBI_Convex_2D_Shape arc;
 extern GLBI_Convex_2D_Shape circle;
 void createCirlce(float r);
-
+extern void closedCylinder();
 void initScene();
 
 void rails_straight();
