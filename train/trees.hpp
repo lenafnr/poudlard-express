@@ -1,4 +1,6 @@
 #pragma once
 #include "draw_scene.hpp"
 
-void trees();
+void pine();
+
+void tree();

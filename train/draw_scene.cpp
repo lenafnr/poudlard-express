@@ -174,5 +174,5 @@ void drawScene()
 	ground.drawShape();
 	repere->draw();
 
-	trees();
+	tree();
 }
