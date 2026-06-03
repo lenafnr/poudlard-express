@@ -62,7 +62,7 @@ void rails_curved() {
 		myEngine.mvMatrixStack.pushMatrix();
 			myEngine.mvMatrixStack.addRotation(teta - M_PI / 2, {0.f, 0.f, 1.f});
 			myEngine.mvMatrixStack.addTranslation({0.f, 0.15f * size_grid, rr});
-			myEngine.mvMatrixStack.addHomothety({rr, 7.f, rr});
+			myEngine.mvMatrixStack.addHomothety({rr, 0.7f * size_grid, rr});
 			myEngine.updateMvMatrix();
 			myEngine.setFlatColor(1.f, 0.7f, 0.f);
 			closedCylinder();
