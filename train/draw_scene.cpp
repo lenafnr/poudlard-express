@@ -3,6 +3,7 @@
 #include "rails.hpp"
 #include "train.hpp"
 #include "station.hpp"
+#include "trees.hpp"
 
 /// Camera parameters
 float angle_theta{45.0}; // Angle between x axis and viewpoint
@@ -60,6 +61,7 @@ IndexedMesh *sphere;
 IndexedMesh *cyl;
 IndexedMesh *cube;
 IndexedMesh *disk;
+StandardMesh *cone;
 
 float rr{0.05f * size_grid};
 float sx{0.05f * size_grid};
@@ -98,6 +100,8 @@ void initScene()
 	circle.initShape(pointCircle);
 	circle.changeNature(GL_TRIANGLE_FAN);
 	
+	cone = basicCone(1.f, 1.f);
+	cone->createVAO();
 	// 1/4 arc
 	std::vector<float> rail;
 	float R = 1.0f;
@@ -170,5 +174,5 @@ void drawScene()
 	ground.drawShape();
 	repere->draw();
 
-	rails_straight();
+	trees();
 }
