@@ -55,15 +55,31 @@ void closedCylinder() {
 	myEngine.mvMatrixStack.popMatrix();
 }
 
+void closedCylinder() {
+	cyl->draw();
+	myEngine.mvMatrixStack.pushMatrix();
+		myEngine.mvMatrixStack.addTranslation({0.f, 0.5f, 0.f});
+		myEngine.mvMatrixStack.addRotation(M_PI/2, {1,0,0});
+		myEngine.updateMvMatrix();
+		circle.drawShape();
+	myEngine.mvMatrixStack.popMatrix();
+	myEngine.mvMatrixStack.pushMatrix();
+		myEngine.mvMatrixStack.addTranslation({0.f, 0.f, 0.f});
+		myEngine.mvMatrixStack.addRotation(M_PI/2, {1,0,0});
+		myEngine.updateMvMatrix();
+		circle.drawShape();
+	myEngine.mvMatrixStack.popMatrix();
+}
+
 StandardMesh *repere = NULL;
 IndexedMesh *sphere;
 IndexedMesh *cyl;
 IndexedMesh *cube;
 IndexedMesh *disk;
 
-float rr{0.5f};
-float sx{0.5f};
-float sr{1.f};
+float rr{0.05f * size_grid};
+float sx{0.05f * size_grid};
+float sr{0.1f * size_grid};
 float size_grid{10.f};
 
 void initScene()
@@ -170,5 +186,5 @@ void drawScene()
 	ground.drawShape();
 	repere->draw();
 
-	train();
+	rails_straight();
 }
