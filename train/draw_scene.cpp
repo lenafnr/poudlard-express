@@ -67,9 +67,9 @@ IndexedMesh *cyl;
 IndexedMesh *cube;
 IndexedMesh *disk;
 
-float rr{0.5f};
-float sx{0.5f};
-float sr{1.f};
+float rr{0.05f * size_grid};
+float sx{0.05f * size_grid};
+float sr{0.1f * size_grid};
 float size_grid{10.f};
 
 void initJson()
