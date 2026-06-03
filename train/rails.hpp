@@ -3,3 +3,5 @@
 
 void rails_straight();
 void rails_curved();
+
+void railsPlacement();

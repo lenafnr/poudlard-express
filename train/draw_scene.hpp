@@ -6,6 +6,8 @@
 #include "glbasimac/glbi_set_of_points.hpp"
 #include "glbasimac/glbi_convex_2D_shape.hpp"
 #include "tools/basic_mesh.hpp"
+#include <fstream>
+#include <iostream>
 
 using namespace glbasimac;
 
@@ -32,7 +34,12 @@ extern GLBI_Convex_2D_Shape arc;
 extern GLBI_Convex_2D_Shape circle;
 void createCirlce(float r);
 extern void closedCylinder();
+
+extern std::array<int,2> stationPos;
+extern std::vector<std::array<int,2>> railsPos;
+
 void initScene();
+void initJson();
 
 void rails_straight();
 void rails_curved();

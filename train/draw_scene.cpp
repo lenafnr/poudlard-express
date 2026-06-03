@@ -3,6 +3,7 @@
 #include "rails.hpp"
 #include "train.hpp"
 #include "station.hpp"
+#include "json.hpp"
 
 /// Camera parameters
 float angle_theta{45.0}; // Angle between x axis and viewpoint
@@ -18,40 +19,45 @@ GLBI_Convex_2D_Shape ground{3};
 GLBI_Convex_2D_Shape arc{3};
 GLBI_Convex_2D_Shape circle;
 
-std::vector<float> pointCircle {
-};
+using json = nlohmann::json;
+
+std::array<int, 2> stationPos{};
+std::vector<std::array<int, 2>> railsPos{};
+
+std::vector<float> pointCircle{};
 
 void createCircle(float r)
 {
-    int segments = 50;
- 
-    for (int i = 0; i < segments; ++i)
-    {
-        // Calcul de l'angle pour ce segment (en radians)
-        float theta = 2.0f * M_PI * float(i) / float(segments);
-        
-        // Calcul des coordonnées x et y
-        float x = r * std::cos(theta);
-        float y = r * std::sin(theta);
-        
-        pointCircle.push_back(x);
-        pointCircle.push_back(y);
-    }
+	int segments = 50;
+
+	for (int i = 0; i < segments; ++i)
+	{
+		// Calcul de l'angle pour ce segment (en radians)
+		float theta = 2.0f * M_PI * float(i) / float(segments);
+
+		// Calcul des coordonnées x et y
+		float x = r * std::cos(theta);
+		float y = r * std::sin(theta);
+
+		pointCircle.push_back(x);
+		pointCircle.push_back(y);
+	}
 }
 
-void closedCylinder() {
+void closedCylinder()
+{
 	cyl->draw();
 	myEngine.mvMatrixStack.pushMatrix();
-		myEngine.mvMatrixStack.addTranslation({0.f, 0.5f, 0.f});
-		myEngine.mvMatrixStack.addRotation(M_PI/2, {1,0,0});
-		myEngine.updateMvMatrix();
-		circle.drawShape();
+	myEngine.mvMatrixStack.addTranslation({0.f, 0.5f, 0.f});
+	myEngine.mvMatrixStack.addRotation(M_PI / 2, {1, 0, 0});
+	myEngine.updateMvMatrix();
+	circle.drawShape();
 	myEngine.mvMatrixStack.popMatrix();
 	myEngine.mvMatrixStack.pushMatrix();
-		myEngine.mvMatrixStack.addTranslation({0.f, 0.f, 0.f});
-		myEngine.mvMatrixStack.addRotation(M_PI/2, {1,0,0});
-		myEngine.updateMvMatrix();
-		circle.drawShape();
+	myEngine.mvMatrixStack.addTranslation({0.f, 0.f, 0.f});
+	myEngine.mvMatrixStack.addRotation(M_PI / 2, {1, 0, 0});
+	myEngine.updateMvMatrix();
+	circle.drawShape();
 	myEngine.mvMatrixStack.popMatrix();
 }
 
@@ -66,15 +72,43 @@ float sx{0.5f};
 float sr{1.f};
 float size_grid{10.f};
 
+void initJson()
+{
+	std::ifstream file("../data/railsAdvanced.json");
+
+	if (!file.is_open())
+	{
+		std::cout << "JSON introuvable !" << std::endl;
+		return;
+	}
+
+	json data;
+	file >> data;
+
+	railsPos.clear();
+
+	for (const auto &p : data["path"])
+	{
+		railsPos.push_back({p[0].get<int>(),
+							p[1].get<int>()});
+	}
+
+	stationPos = {
+		data["origin"][0].get<int>(),
+		data["origin"][1].get<int>()};
+
+	size_grid = data["size_grid"].get<float>();
+}
+
 void initScene()
 {
 	std::vector<float> points{0.0, 0.0, 0.0};
 	somePoints.initSet(points, 1.0, 1.0, 1.0);
 
-	std::vector<float> baseCarre{-100.0, -100.0, 0.0,
-								 100.0, -100.0, 0.0,
-								 100.0, 100.0, 0.0,
-								 -100.0, 100.0, 0.0};
+	std::vector<float> baseCarre{-50.0, -50.0, 0.0,
+								 50.0, -50.0, 0.0,
+								 50.0, 50.0, 0.0,
+								 -50.0, 50.0, 0.0};
 
 	ground.initShape(baseCarre);
 	ground.changeNature(GL_TRIANGLE_FAN);
@@ -97,7 +131,7 @@ void initScene()
 	createCircle(1.f);
 	circle.initShape(pointCircle);
 	circle.changeNature(GL_TRIANGLE_FAN);
-	
+
 	// 1/4 arc
 	std::vector<float> rail;
 	float R = 1.0f;
@@ -129,18 +163,18 @@ void initScene()
 
 	arc.initShape(rail);
 	arc.changeNature(GL_TRIANGLE_STRIP);
-		// Gold
+	// Gold
 	int x_g, y_g, n_g;
-    unsigned char* img_gold = stbi_load("../assets/textures/gold.jpg", &x_g, &y_g, &n_g, 4);
+	unsigned char *img_gold = stbi_load("../assets/textures/gold.jpg", &x_g, &y_g, &n_g, 4);
 	textureGold.createTexture();
 	textureGold.attachTexture();
 	textureGold.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	textureGold.loadImage(x_g, y_g, 4, img_gold);
 	textureGold.detachTexture();
 	stbi_image_free(img_gold);
-		// Clouds
+	// Clouds
 	int x_c, y_c, n_c;
-    unsigned char* img_cloud = stbi_load("../assets/textures/cloud.jpg", &x_c, &y_c, &n_c, 4);
+	unsigned char *img_cloud = stbi_load("../assets/textures/cloud.jpg", &x_c, &y_c, &n_c, 4);
 	textureCloud.createTexture();
 	textureCloud.attachTexture();
 	textureCloud.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -149,14 +183,14 @@ void initScene()
 	stbi_image_free(img_cloud);
 	// 9 3/4
 	int x_p, y_p, n_p;
-    unsigned char* img_platform = stbi_load("../assets/textures/plateform.jpg", &x_p, &y_p, &n_p, 4);
+	unsigned char *img_platform = stbi_load("../assets/textures/plateform.jpg", &x_p, &y_p, &n_p, 4);
 	texturePlatform.createTexture();
 	texturePlatform.attachTexture();
 	texturePlatform.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	texturePlatform.loadImage(x_p, y_p, 4, img_platform);
 	texturePlatform.detachTexture();
 	stbi_image_free(img_platform);
-	
+
 	glActiveTexture(GL_TEXTURE0);
 }
 
@@ -165,10 +199,24 @@ void drawScene()
 	glPointSize(10.0);
 
 	myEngine.activateTexturing(false);
-	myEngine.setFlatColor(0.2,0.0,0.0);
+	myEngine.setFlatColor(0.2, 0.0, 0.0);
 
 	ground.drawShape();
 	repere->draw();
 
+	railsPlacement();
+
+	myEngine.mvMatrixStack.pushMatrix();
+	myEngine.mvMatrixStack.addTranslation({2.f * size_grid, 2.f * size_grid, 0});
+	myEngine.updateMvMatrix();
 	train();
+	myEngine.mvMatrixStack.popMatrix();
+
+	myEngine.mvMatrixStack.pushMatrix();
+	myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 0.f, 1.f});
+	myEngine.mvMatrixStack.addTranslation({stationPos[0] * size_grid, stationPos[1] * size_grid, 0});
+	// myEngine.mvMatrixStack.addTranslation({1.f * size_grid, -1.f * size_grid, 0.f});
+	myEngine.updateMvMatrix();
+	station();
+	myEngine.mvMatrixStack.popMatrix();
 }

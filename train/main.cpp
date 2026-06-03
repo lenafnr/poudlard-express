@@ -60,11 +60,11 @@ void onKey(GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods
 			case GLFW_KEY_RIGHT :
 				angle_theta -= 1.0;
 			break;
-		case GLFW_KEY_Z :
-			dist_zoom += 10;
-			break;
 		case GLFW_KEY_R :
-			dist_zoom -= 10;
+			dist_zoom += 5;
+			break;
+		case GLFW_KEY_D :
+			dist_zoom -= 5;
 			break;
 
 		default: std::cerr<<"Touche non gérée "<<key<<std::endl;
@@ -89,10 +89,10 @@ int main(int /*argc*/, char** /*argv*/)
 	if (!glfwInit()) return -1;
 
     /* Try to uncomment this for MAC OS if it did not work */
-    // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    // glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+     //glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+     //glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+     //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+     //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	/* Callback to a function if an error is rised by GLFW */
 	glfwSetErrorCallback(onError);
@@ -126,6 +126,9 @@ int main(int /*argc*/, char** /*argv*/)
 	CHECK_GL;
 
 	initScene();
+
+	initJson();
+
 	double elapsedTime{0.0};
 
 	/* Loop until the user closes the window */
