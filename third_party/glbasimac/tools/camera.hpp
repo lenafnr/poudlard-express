@@ -188,12 +188,13 @@ inline void FPSCamera::reactuViewMatrix() {
 }
 
 inline void FPSCamera::reactuOrientation() {
-	Matrix4D matt = Matrix4D::rotation(orientat_cam[1],1);
+	Matrix4D matt = Matrix4D::rotation(orientat_cam[1],2);
 	Vector3D left_vec = (matt.xDir(top_init_cam^dir_init_cam)).homogeneate();
 	Matrix4D matu = Matrix4D::rotation(orientat_cam[0],left_vec);
 	top__dir_cam = (matu.xDir(top_init_cam)).homogeneate();
 	view_dir_cam = (matu*(matt.xDir(dir_init_cam))).homogeneate();
 	reactuViewMatrix();
+	
 }
 
 /// Affichage de la camera sur un flux

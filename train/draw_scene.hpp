@@ -14,9 +14,6 @@ using namespace glbasimac;
 /* Camera parameters and functions */
 static const float Z_NEAR {0.1f};
 static const float Z_FAR {500.f};
-extern float angle_theta;      // Angle between x axis and viewpoint
-extern float angle_phy  ;      // Angle between z axis and viewpoint
-extern float dist_zoom  ;      // Distance between origin and viewpoint
 extern float rr ;
 extern float sx;
 extern float sr;
@@ -25,11 +22,20 @@ extern float size_grid;
 extern GLBI_Texture textureGold;
 extern GLBI_Texture textureCloud;
 extern GLBI_Texture texturePlatform;
+
+extern GLBI_Texture textureNx;
+extern GLBI_Texture textureNy;
+extern GLBI_Texture textureNz;
+extern GLBI_Texture texturePx;
+extern GLBI_Texture texturePy;
+extern GLBI_Texture texturePz;
+
 extern GLBI_Engine myEngine;
 extern IndexedMesh* sphere;
 extern IndexedMesh* cube;
 extern IndexedMesh* cyl;
 extern IndexedMesh* sphere;
+extern StandardMesh* rectangle;
 extern GLBI_Convex_2D_Shape arc;
 extern GLBI_Convex_2D_Shape circle;
 void createCirlce(float r);
