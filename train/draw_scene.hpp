@@ -36,6 +36,7 @@ extern IndexedMesh* cube;
 extern IndexedMesh* cyl;
 extern IndexedMesh* sphere;
 extern StandardMesh* rectangle;
+extern StandardMesh* cone;
 extern GLBI_Convex_2D_Shape arc;
 extern GLBI_Convex_2D_Shape circle;
 void createCirlce(float r);

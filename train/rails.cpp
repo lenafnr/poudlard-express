@@ -1,4 +1,5 @@
 #include "rails.hpp"
+#include <array>
 
 void rails_straight()
 {

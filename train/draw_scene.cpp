@@ -3,6 +3,7 @@
 #include "rails.hpp"
 #include "train.hpp"
 #include "station.hpp"
+#include "trees.hpp"
 #include "json.hpp"
 #include "drawSky.hpp"
 
@@ -70,6 +71,7 @@ IndexedMesh *sphere;
 IndexedMesh *cyl;
 IndexedMesh *cube;
 IndexedMesh *disk;
+StandardMesh *cone;
 
 float rr{0.05f * size_grid};
 float sx{0.05f * size_grid};
@@ -139,7 +141,9 @@ void initScene()
 	// rectangle 2D
 	rectangle = basicRect(1.0, 1.0);
 	rectangle->createVAO();
-
+	
+	cone = basicCone(1.f, 1.f);
+	cone->createVAO();
 	// 1/4 arc
 	std::vector<float> rail;
 	float R = 1.0f;
