@@ -141,7 +141,10 @@ int main(int /*argc*/, char** /*argv*/)
 		double startTime = glfwGetTime();
 
 		/* Render begins here */
-		glClearColor(0.f,0.5f,0.5f,0.0f);
+		if (phong_lightning)
+			glClearColor(0.f,0.0f,0.0f,0.0f);
+		else
+			glClearColor(0.f,0.5f,0.5f,0.0f);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);

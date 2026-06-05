@@ -109,6 +109,7 @@ void initScene()
 	myEngine.switchToPhongShading();
 	myEngine.setLightPosition({3.0f * size_grid, 0.f, 5.0f * size_grid, 1.f}, 0);
 	myEngine.setLightIntensity({2000.f, 2000.f, 2000.f});
+	// myEngine.setConeLight({1.f, 1.f, 0.f}, M_PI / 4, 0);
 	myEngine.switchToFlatShading();
 
 	std::vector<float> points{0.0, 0.0, 0.0};
@@ -213,10 +214,7 @@ void drawScene()
 	glPointSize(10.0);
 
 	myEngine.activateTexturing(false);
-	myEngine.setFlatColor(0.2, 0.0, 0.0);
 
-	ground.drawShape();
-	repere->draw();
 	// La lune
 	if (phong_lightning) {
 		myEngine.mvMatrixStack.pushMatrix();
@@ -235,8 +233,12 @@ void drawScene()
 		float a = M_PI * angle / 180.f;
 		float x = cos(a) * 3.f * size_grid;
 		float y = sin(a) * 3.f * size_grid;
-		myEngine.setLightPosition({x,y,5.f * size_grid,1.f},0);
+		myEngine.setLightPosition({x, y, 5.f * size_grid,1.f},0);
 	}
+	myEngine.setFlatColor(0.2, 0.0, 0.0);
+	// Car le modèle phong utilise une matrice pour calculer les normales : il faut l'update
+	myEngine.updateMvMatrix();
+	ground.drawShape();
 	railsPlacement();
 
 	myEngine.mvMatrixStack.pushMatrix();
