@@ -9,3 +9,4 @@ void roofStation();
 void pannelStation();
 void lamp();
 void books();
+void lampsPlacement();

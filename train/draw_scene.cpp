@@ -31,6 +31,7 @@ std::array<int, 2> stationPos{};
 std::vector<std::array<int, 2>> railsPos{};
 std::vector<std::array<int, 2>> treesPos{};
 std::vector<std::array<int, 2>> pinePos{};
+std::vector<std::array<int, 2>> lampPos{};
 
 std::vector<float> pointCircle{};
 
@@ -119,6 +120,14 @@ void initJson()
 	for (const auto &p : data["pine"])
 	{
 		pinePos.push_back({p[0].get<int>(),
+						   p[1].get<int>()});
+	}
+
+	lampPos.clear();
+
+	for (const auto &p : data["lamp"])
+	{
+		lampPos.push_back({p[0].get<int>(),
 						   p[1].get<int>()});
 	}
 
@@ -328,6 +337,7 @@ void drawScene()
 	ground.drawShape();
 	railsPlacement();
 	treesPlacement();
+	lampsPlacement();
 	// treesPlacement();
 	myEngine.mvMatrixStack.pushMatrix();
 	myEngine.mvMatrixStack.addTranslation({2.f * size_grid, 2.f * size_grid, 0});
