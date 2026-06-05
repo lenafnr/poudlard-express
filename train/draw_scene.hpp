@@ -44,6 +44,9 @@ extern void closedCylinder();
 
 extern std::array<int,2> stationPos;
 extern std::vector<std::array<int,2>> railsPos;
+extern std::vector<std::array<int, 2>> treesPos;
+extern std::vector<std::array<int, 2>> pinePos;
+
 extern bool phong_lightning;
 
 void initScene();

@@ -29,6 +29,8 @@ using json = nlohmann::json;
 
 std::array<int, 2> stationPos{};
 std::vector<std::array<int, 2>> railsPos{};
+std::vector<std::array<int, 2>> treesPos{};
+std::vector<std::array<int, 2>> pinePos{};
 
 std::vector<float> pointCircle{};
 
@@ -81,7 +83,7 @@ float size_grid{10.f};
 
 void initJson()
 {
-	std::ifstream file("../data/railsAdvanced.json");
+	std::ifstream file("../data/props.json");
 
 	if (!file.is_open())
 	{
@@ -104,6 +106,22 @@ void initJson()
 		data["origin"][0].get<int>(),
 		data["origin"][1].get<int>()};
 
+	treesPos.clear();
+
+	for (const auto &p : data["trees"])
+	{
+		treesPos.push_back({p[0].get<int>(),
+							p[1].get<int>()});
+	}
+
+	pinePos.clear();
+
+	for (const auto &p : data["pine"])
+	{
+		pinePos.push_back({p[0].get<int>(),
+						   p[1].get<int>()});
+	}
+
 	size_grid = data["size_grid"].get<float>();
 }
 
@@ -123,8 +141,8 @@ void initScene()
 								 50.0, -50.0, 0.0,
 								 50.0, 50.0, 0.0,
 								 -50.0, 50.0, 0.0};
-	
-	myEngine.setNormalForConvex2DShape({0.f,0.f,1.f});
+
+	myEngine.setNormalForConvex2DShape({0.f, 0.f, 1.f});
 	ground.initShape(baseCarre);
 	ground.changeNature(GL_TRIANGLE_FAN);
 
@@ -144,14 +162,14 @@ void initScene()
 	sphere->createVAO(); // Creation de l'objet dans OpenGL
 
 	createCircle(1.f);
-	myEngine.setNormalForConvex2DShape({0.f,0.f,1.f});
+	myEngine.setNormalForConvex2DShape({0.f, 0.f, 1.f});
 	circle.initShape(pointCircle);
 	circle.changeNature(GL_TRIANGLE_FAN);
 
 	// rectangle 2D
 	rectangle = basicRect(1.0, 1.0);
 	rectangle->createVAO();
-	
+
 	cone = basicCone(1.f, 1.f);
 	cone->createVAO();
 	// 1/4 arc
@@ -182,7 +200,7 @@ void initScene()
 		rail.push_back(y2);
 		rail.push_back(0.f);
 	}
-	myEngine.setNormalForConvex2DShape({0.f,0.f,1.f});
+	myEngine.setNormalForConvex2DShape({0.f, 0.f, 1.f});
 	arc.initShape(rail);
 	arc.changeNature(GL_TRIANGLE_STRIP);
 	// Gold
@@ -214,64 +232,64 @@ void initScene()
 	stbi_image_free(img_platform);
 
 	// 1. Px skyBox
-    int x_Px, y_Px, n_Px;
-    unsigned char *img_px = stbi_load("../assets/textures/px.png", &x_Px, &y_Px, &n_Px, 4);
-    texturePx.createTexture();
-    texturePx.attachTexture();
-    texturePx.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    texturePx.loadImage(x_Px, y_Px, 4, img_px);
-    texturePx.detachTexture();
-    stbi_image_free(img_px);
+	int x_Px, y_Px, n_Px;
+	unsigned char *img_px = stbi_load("../assets/textures/px.png", &x_Px, &y_Px, &n_Px, 4);
+	texturePx.createTexture();
+	texturePx.attachTexture();
+	texturePx.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	texturePx.loadImage(x_Px, y_Px, 4, img_px);
+	texturePx.detachTexture();
+	stbi_image_free(img_px);
 
-    // 2. Nx skyBox
-    int x_Nx, y_Nx, n_Nx;
-    unsigned char *img_nx = stbi_load("../assets/textures/nx.png", &x_Nx, &y_Nx, &n_Nx, 4);
-    textureNx.createTexture();
-    textureNx.attachTexture();
-    textureNx.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    textureNx.loadImage(x_Nx, y_Nx, 4, img_nx);
-    textureNx.detachTexture();
-    stbi_image_free(img_nx);
+	// 2. Nx skyBox
+	int x_Nx, y_Nx, n_Nx;
+	unsigned char *img_nx = stbi_load("../assets/textures/nx.png", &x_Nx, &y_Nx, &n_Nx, 4);
+	textureNx.createTexture();
+	textureNx.attachTexture();
+	textureNx.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	textureNx.loadImage(x_Nx, y_Nx, 4, img_nx);
+	textureNx.detachTexture();
+	stbi_image_free(img_nx);
 
-    // 3. Py skyBox
-    int x_Py, y_Py, n_Py;
-    unsigned char *img_py = stbi_load("../assets/textures/py.png", &x_Py, &y_Py, &n_Py, 4);
-    texturePy.createTexture();
-    texturePy.attachTexture();
-    texturePy.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    texturePy.loadImage(x_Py, y_Py, 4, img_py);
-    texturePy.detachTexture();
-    stbi_image_free(img_py);
+	// 3. Py skyBox
+	int x_Py, y_Py, n_Py;
+	unsigned char *img_py = stbi_load("../assets/textures/py.png", &x_Py, &y_Py, &n_Py, 4);
+	texturePy.createTexture();
+	texturePy.attachTexture();
+	texturePy.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	texturePy.loadImage(x_Py, y_Py, 4, img_py);
+	texturePy.detachTexture();
+	stbi_image_free(img_py);
 
-    // 4. Ny skyBox
-    int x_Ny, y_Ny, n_Ny;
-    unsigned char *img_ny = stbi_load("../assets/textures/ny.png", &x_Ny, &y_Ny, &n_Ny, 4);
-    textureNy.createTexture();
-    textureNy.attachTexture();
-    textureNy.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    textureNy.loadImage(x_Ny, y_Ny, 4, img_ny);
-    textureNy.detachTexture();
-    stbi_image_free(img_ny);
+	// 4. Ny skyBox
+	int x_Ny, y_Ny, n_Ny;
+	unsigned char *img_ny = stbi_load("../assets/textures/ny.png", &x_Ny, &y_Ny, &n_Ny, 4);
+	textureNy.createTexture();
+	textureNy.attachTexture();
+	textureNy.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	textureNy.loadImage(x_Ny, y_Ny, 4, img_ny);
+	textureNy.detachTexture();
+	stbi_image_free(img_ny);
 
-    // 5. Pz skyBox
-    int x_Pz, y_Pz, n_Pz;
-    unsigned char *img_pz = stbi_load("../assets/textures/pz.png", &x_Pz, &y_Pz, &n_Pz, 4);
-    texturePz.createTexture();
-    texturePz.attachTexture();
-    texturePz.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    texturePz.loadImage(x_Pz, y_Pz, 4, img_pz);
-    texturePz.detachTexture();
-    stbi_image_free(img_pz);
+	// 5. Pz skyBox
+	int x_Pz, y_Pz, n_Pz;
+	unsigned char *img_pz = stbi_load("../assets/textures/pz.png", &x_Pz, &y_Pz, &n_Pz, 4);
+	texturePz.createTexture();
+	texturePz.attachTexture();
+	texturePz.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	texturePz.loadImage(x_Pz, y_Pz, 4, img_pz);
+	texturePz.detachTexture();
+	stbi_image_free(img_pz);
 
-    // 6. Nz skyBox
-    int x_Nz, y_Nz, n_Nz;
-    unsigned char *img_nz = stbi_load("../assets/textures/nz.png", &x_Nz, &y_Nz, &n_Nz, 4);
-    textureNz.createTexture();
-    textureNz.attachTexture();
-    textureNz.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    textureNz.loadImage(x_Nz, y_Nz, 4, img_nz);
-    textureNz.detachTexture();
-    stbi_image_free(img_nz);
+	// 6. Nz skyBox
+	int x_Nz, y_Nz, n_Nz;
+	unsigned char *img_nz = stbi_load("../assets/textures/nz.png", &x_Nz, &y_Nz, &n_Nz, 4);
+	textureNz.createTexture();
+	textureNz.attachTexture();
+	textureNz.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	textureNz.loadImage(x_Nz, y_Nz, 4, img_nz);
+	textureNz.detachTexture();
+	stbi_image_free(img_nz);
 
 	glActiveTexture(GL_TEXTURE0);
 }
@@ -284,15 +302,16 @@ void drawScene()
 	myEngine.activateTexturing(false);
 
 	// La lune
-	if (phong_lightning) {
+	if (phong_lightning)
+	{
 		myEngine.mvMatrixStack.pushMatrix();
-			myEngine.mvMatrixStack.addRotation(M_PI * angle / 180, {0.0, 0.0, 1.0});
-			myEngine.mvMatrixStack.addTranslation({3.0f * size_grid, 0.f, 5.0f * size_grid});
-			myEngine.mvMatrixStack.addHomothety({2.f, 2.f, 2.f});
-			myEngine.updateMvMatrix();
-			myEngine.setFlatColor(0.5f,0.5f,0.5f);
-			sphere->draw();
-			angle++;
+		myEngine.mvMatrixStack.addRotation(M_PI * angle / 180, {0.0, 0.0, 1.0});
+		myEngine.mvMatrixStack.addTranslation({3.0f * size_grid, 0.f, 5.0f * size_grid});
+		myEngine.mvMatrixStack.addHomothety({2.f, 2.f, 2.f});
+		myEngine.updateMvMatrix();
+		myEngine.setFlatColor(0.5f, 0.5f, 0.5f);
+		sphere->draw();
+		angle++;
 		myEngine.mvMatrixStack.popMatrix();
 
 		// On illumine la scène
@@ -301,14 +320,15 @@ void drawScene()
 		float a = M_PI * angle / 180.f;
 		float x = cos(a) * 3.f * size_grid;
 		float y = sin(a) * 3.f * size_grid;
-		myEngine.setLightPosition({x, y, 5.f * size_grid,1.f},0);
+		myEngine.setLightPosition({x, y, 5.f * size_grid, 1.f}, 0);
 	}
 	myEngine.setFlatColor(0.2, 0.0, 0.0);
 	// Car le modèle phong utilise une matrice pour calculer les normales : il faut l'update
 	myEngine.updateMvMatrix();
 	ground.drawShape();
 	railsPlacement();
-
+	treesPlacement();
+	// treesPlacement();
 	myEngine.mvMatrixStack.pushMatrix();
 	myEngine.mvMatrixStack.addTranslation({2.f * size_grid, 2.f * size_grid, 0});
 	myEngine.updateMvMatrix();
@@ -316,14 +336,13 @@ void drawScene()
 	myEngine.mvMatrixStack.popMatrix();
 
 	myEngine.mvMatrixStack.pushMatrix();
-	myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 0.f, 1.f});
 	myEngine.mvMatrixStack.addTranslation({stationPos[0] * size_grid, stationPos[1] * size_grid, 0});
-	myEngine.mvMatrixStack.addTranslation({1.f * size_grid, -1.f * size_grid, 0.f});
 	myEngine.updateMvMatrix();
 	station();
 	myEngine.mvMatrixStack.popMatrix();
 	drawRect();
-	if (phong_lightning) {
+	if (phong_lightning)
+	{
 		myEngine.switchToFlatShading();
 	}
 }

@@ -4,3 +4,5 @@
 void pine();
 
 void tree();
+
+void treesPlacement();
