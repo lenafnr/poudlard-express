@@ -23,6 +23,7 @@ GLBI_Convex_2D_Shape ground{3};
 GLBI_Convex_2D_Shape arc{3};
 GLBI_Convex_2D_Shape circle;
 StandardMesh *rectangle;
+bool phong_lightning = true;
 
 using json = nlohmann::json;
 
@@ -53,7 +54,7 @@ void closedCylinder()
 {
 	cyl->draw();
 	myEngine.mvMatrixStack.pushMatrix();
-	myEngine.mvMatrixStack.addTranslation({0.f, 0.5f, 0.f});
+	myEngine.mvMatrixStack.addTranslation({0.f, 1.f, 0.f});
 	myEngine.mvMatrixStack.addRotation(M_PI / 2, {1, 0, 0});
 	myEngine.updateMvMatrix();
 	circle.drawShape();
@@ -108,6 +109,13 @@ void initJson()
 
 void initScene()
 {
+	// Initialisation de la lumière (lune)
+	myEngine.switchToPhongShading();
+	myEngine.setLightPosition({3.0f * size_grid, 0.f, 5.0f * size_grid, 1.f}, 0);
+	myEngine.setLightIntensity({2000.f, 2000.f, 2000.f});
+	// myEngine.setConeLight({1.f, 1.f, 0.f}, M_PI / 4, 0);
+	myEngine.switchToFlatShading();
+
 	std::vector<float> points{0.0, 0.0, 0.0};
 	somePoints.initSet(points, 1.0, 1.0, 1.0);
 
@@ -115,7 +123,8 @@ void initScene()
 								 50.0, -50.0, 0.0,
 								 50.0, 50.0, 0.0,
 								 -50.0, 50.0, 0.0};
-
+	
+	myEngine.setNormalForConvex2DShape({0.f,0.f,1.f});
 	ground.initShape(baseCarre);
 	ground.changeNature(GL_TRIANGLE_FAN);
 
@@ -135,6 +144,7 @@ void initScene()
 	sphere->createVAO(); // Creation de l'objet dans OpenGL
 
 	createCircle(1.f);
+	myEngine.setNormalForConvex2DShape({0.f,0.f,1.f});
 	circle.initShape(pointCircle);
 	circle.changeNature(GL_TRIANGLE_FAN);
 
@@ -172,7 +182,7 @@ void initScene()
 		rail.push_back(y2);
 		rail.push_back(0.f);
 	}
-
+	myEngine.setNormalForConvex2DShape({0.f,0.f,1.f});
 	arc.initShape(rail);
 	arc.changeNature(GL_TRIANGLE_STRIP);
 	// Gold
@@ -266,16 +276,37 @@ void initScene()
 	glActiveTexture(GL_TEXTURE0);
 }
 
+int angle{};
 void drawScene()
 {
 	glPointSize(10.0);
 
 	myEngine.activateTexturing(false);
+
+	// La lune
+	if (phong_lightning) {
+		myEngine.mvMatrixStack.pushMatrix();
+			myEngine.mvMatrixStack.addRotation(M_PI * angle / 180, {0.0, 0.0, 1.0});
+			myEngine.mvMatrixStack.addTranslation({3.0f * size_grid, 0.f, 5.0f * size_grid});
+			myEngine.mvMatrixStack.addHomothety({2.f, 2.f, 2.f});
+			myEngine.updateMvMatrix();
+			myEngine.setFlatColor(0.5f,0.5f,0.5f);
+			sphere->draw();
+			angle++;
+		myEngine.mvMatrixStack.popMatrix();
+
+		// On illumine la scène
+		myEngine.switchToPhongShading();
+		// On fait tourner la lumière avec la sphère
+		float a = M_PI * angle / 180.f;
+		float x = cos(a) * 3.f * size_grid;
+		float y = sin(a) * 3.f * size_grid;
+		myEngine.setLightPosition({x, y, 5.f * size_grid,1.f},0);
+	}
 	myEngine.setFlatColor(0.2, 0.0, 0.0);
-
+	// Car le modèle phong utilise une matrice pour calculer les normales : il faut l'update
+	myEngine.updateMvMatrix();
 	ground.drawShape();
-	repere->draw();
-
 	railsPlacement();
 
 	myEngine.mvMatrixStack.pushMatrix();
@@ -291,7 +322,4 @@ void drawScene()
 	myEngine.updateMvMatrix();
 	station();
 	myEngine.mvMatrixStack.popMatrix();
-
-	// rectangle->draw();
-	drawRect();
 }

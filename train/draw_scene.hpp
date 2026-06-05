@@ -44,6 +44,7 @@ extern void closedCylinder();
 
 extern std::array<int,2> stationPos;
 extern std::vector<std::array<int,2>> railsPos;
+extern bool phong_lightning;
 
 void initScene();
 void initJson();
