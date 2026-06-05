@@ -66,10 +66,13 @@ void onKey(GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods
 		case GLFW_KEY_D :
 			dist_zoom -= 5;
 			break;
-
+		case GLFW_KEY_J :
+			if (is_pressed) {
+				phong_lightning = !phong_lightning;
+			}
+       		break;
 		default: std::cerr<<"Touche non gérée "<<key<<std::endl;
 	}
-
 }
 
 void onMouseButton(GLFWwindow* window, int button, int action, int /*mods*/)

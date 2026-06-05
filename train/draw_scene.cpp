@@ -19,6 +19,7 @@ GLBI_Set_Of_Points somePoints(3);
 GLBI_Convex_2D_Shape ground{3};
 GLBI_Convex_2D_Shape arc{3};
 GLBI_Convex_2D_Shape circle;
+bool phong_lightning = true;
 
 using json = nlohmann::json;
 
@@ -217,24 +218,25 @@ void drawScene()
 	ground.drawShape();
 	repere->draw();
 	// La lune
-	myEngine.mvMatrixStack.pushMatrix();
-		myEngine.mvMatrixStack.addRotation(M_PI * angle / 180, {0.0, 0.0, 1.0});
-		myEngine.mvMatrixStack.addTranslation({3.0f * size_grid, 0.f, 5.0f * size_grid});
-		myEngine.mvMatrixStack.addHomothety({2.f, 2.f, 2.f});
-		myEngine.updateMvMatrix();
-		myEngine.setFlatColor(0.5f,0.5f,0.5f);
-		sphere->draw();
-		angle++;
-	myEngine.mvMatrixStack.popMatrix();
+	if (phong_lightning) {
+		myEngine.mvMatrixStack.pushMatrix();
+			myEngine.mvMatrixStack.addRotation(M_PI * angle / 180, {0.0, 0.0, 1.0});
+			myEngine.mvMatrixStack.addTranslation({3.0f * size_grid, 0.f, 5.0f * size_grid});
+			myEngine.mvMatrixStack.addHomothety({2.f, 2.f, 2.f});
+			myEngine.updateMvMatrix();
+			myEngine.setFlatColor(0.5f,0.5f,0.5f);
+			sphere->draw();
+			angle++;
+		myEngine.mvMatrixStack.popMatrix();
 
-	// On illumine la scène
-	myEngine.switchToPhongShading();
-	// On fait tourner la lumière avec la sphère
-	float a = M_PI * angle / 180.f;
-	float x = cos(a) * 3.f * size_grid;
-	float y = sin(a) * 3.f * size_grid;
-	myEngine.setLightPosition({x,y,5.f * size_grid,1.f},0);
-
+		// On illumine la scène
+		myEngine.switchToPhongShading();
+		// On fait tourner la lumière avec la sphère
+		float a = M_PI * angle / 180.f;
+		float x = cos(a) * 3.f * size_grid;
+		float y = sin(a) * 3.f * size_grid;
+		myEngine.setLightPosition({x,y,5.f * size_grid,1.f},0);
+	}
 	railsPlacement();
 
 	myEngine.mvMatrixStack.pushMatrix();
@@ -250,6 +252,7 @@ void drawScene()
 	myEngine.updateMvMatrix();
 	station();
 	myEngine.mvMatrixStack.popMatrix();
-
-	myEngine.switchToFlatShading();
+	if (phong_lightning) {
+		myEngine.switchToFlatShading();
+	}
 }
