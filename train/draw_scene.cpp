@@ -104,6 +104,12 @@ void initJson()
 
 void initScene()
 {
+	// Initialisation de la lumière (lune)
+	myEngine.switchToPhongShading();
+	myEngine.setLightPosition({3.0f * size_grid, 0.f, 5.0f * size_grid, 1.f}, 0);
+	myEngine.setLightIntensity({1500.f, 1500.f, 1500.f});
+	myEngine.switchToFlatShading();
+
 	std::vector<float> points{0.0, 0.0, 0.0};
 	somePoints.initSet(points, 1.0, 1.0, 1.0);
 
@@ -111,7 +117,8 @@ void initScene()
 								 50.0, -50.0, 0.0,
 								 50.0, 50.0, 0.0,
 								 -50.0, 50.0, 0.0};
-
+	
+	myEngine.setNormalForConvex2DShape({0.f,0.f,1.f});
 	ground.initShape(baseCarre);
 	ground.changeNature(GL_TRIANGLE_FAN);
 
@@ -131,6 +138,7 @@ void initScene()
 	sphere->createVAO(); // Creation de l'objet dans OpenGL
 
 	createCircle(1.f);
+	myEngine.setNormalForConvex2DShape({0.f,0.f,1.f});
 	circle.initShape(pointCircle);
 	circle.changeNature(GL_TRIANGLE_FAN);
 	
@@ -164,7 +172,7 @@ void initScene()
 		rail.push_back(y2);
 		rail.push_back(0.f);
 	}
-
+	myEngine.setNormalForConvex2DShape({0.f,0.f,1.f});
 	arc.initShape(rail);
 	arc.changeNature(GL_TRIANGLE_STRIP);
 	// Gold
@@ -198,6 +206,7 @@ void initScene()
 	glActiveTexture(GL_TEXTURE0);
 }
 
+int angle{};
 void drawScene()
 {
 	glPointSize(10.0);
@@ -207,6 +216,24 @@ void drawScene()
 
 	ground.drawShape();
 	repere->draw();
+	// La lune
+	myEngine.mvMatrixStack.pushMatrix();
+		myEngine.mvMatrixStack.addRotation(M_PI * angle / 180, {0.0, 0.0, 1.0});
+		myEngine.mvMatrixStack.addTranslation({3.0f * size_grid, 0.f, 5.0f * size_grid});
+		myEngine.mvMatrixStack.addHomothety({2.f, 2.f, 2.f});
+		myEngine.updateMvMatrix();
+		myEngine.setFlatColor(0.5f,0.5f,0.5f);
+		sphere->draw();
+		angle++;
+	myEngine.mvMatrixStack.popMatrix();
+
+	// On illumine la scène
+	myEngine.switchToPhongShading();
+	// On fait tourner la lumière avec la sphère
+	float a = M_PI * angle / 180.f;
+	float x = cos(a) * 3.f * size_grid;
+	float y = sin(a) * 3.f * size_grid;
+	myEngine.setLightPosition({x,y,5.f * size_grid,1.f},0);
 
 	railsPlacement();
 
@@ -223,4 +250,6 @@ void drawScene()
 	myEngine.updateMvMatrix();
 	station();
 	myEngine.mvMatrixStack.popMatrix();
+
+	myEngine.switchToFlatShading();
 }
