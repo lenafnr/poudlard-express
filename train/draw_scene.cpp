@@ -322,4 +322,8 @@ void drawScene()
 	myEngine.updateMvMatrix();
 	station();
 	myEngine.mvMatrixStack.popMatrix();
+	drawRect();
+	if (phong_lightning) {
+		myEngine.switchToFlatShading();
+	}
 }
