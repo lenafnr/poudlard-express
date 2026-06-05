@@ -49,7 +49,7 @@ void closedCylinder()
 {
 	cyl->draw();
 	myEngine.mvMatrixStack.pushMatrix();
-	myEngine.mvMatrixStack.addTranslation({0.f, 0.5f, 0.f});
+	myEngine.mvMatrixStack.addTranslation({0.f, 1.f, 0.f});
 	myEngine.mvMatrixStack.addRotation(M_PI / 2, {1, 0, 0});
 	myEngine.updateMvMatrix();
 	circle.drawShape();
@@ -107,7 +107,7 @@ void initScene()
 	// Initialisation de la lumière (lune)
 	myEngine.switchToPhongShading();
 	myEngine.setLightPosition({3.0f * size_grid, 0.f, 5.0f * size_grid, 1.f}, 0);
-	myEngine.setLightIntensity({1500.f, 1500.f, 1500.f});
+	myEngine.setLightIntensity({2000.f, 2000.f, 2000.f});
 	myEngine.switchToFlatShading();
 
 	std::vector<float> points{0.0, 0.0, 0.0};

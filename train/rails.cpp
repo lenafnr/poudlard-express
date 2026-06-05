@@ -68,7 +68,7 @@ void rails_curved()
 		float teta = M_PI / 8.f * i;
 		myEngine.mvMatrixStack.pushMatrix();
 		myEngine.mvMatrixStack.addRotation(teta - M_PI / 2, {0.f, 0.f, 1.f});
-		myEngine.mvMatrixStack.addTranslation({0.f, 2.f, rr});
+		myEngine.mvMatrixStack.addTranslation({0.f, 1.5f, rr});
 		myEngine.mvMatrixStack.addHomothety({rr, 7.f, rr});
 		myEngine.updateMvMatrix();
 		myEngine.setFlatColor(1.f, 0.7f, 0.f);
