@@ -1,4 +1,5 @@
 #include "station.hpp"
+#include <array>
 
 const float U = size_grid;
 
