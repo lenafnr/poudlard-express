@@ -132,8 +132,16 @@ void initScene()
 	myEngine.switchToPhongShading();
 	myEngine.setLightPosition({3.0f * size_grid, 0.f, 5.0f * size_grid, 1.f}, 0);
 	myEngine.setLightIntensity({2000.f, 2000.f, 2000.f});
-	// Lampadère
-	// myEngine.addALight({-0.2f * size_grid, 0.9f * size_grid, 0.585f * size_grid, 1.f},{20.f,20.f,20.f});
+	// Lampadères
+	int lightIndex = 1;
+    for (const auto &position : lampPos) {
+        float lampX = (position[0] * size_grid) + (size_grid / 2.0f);
+        float lampY = (position[1] * size_grid) + (size_grid / 2.0f);
+        float lampZ = 0.585f * size_grid;
+        
+        myEngine.addALight({lampX, lampY, lampZ, 1.f}, {50.f, 50.f, 50.f});
+        lightIndex++;
+    }
 	myEngine.switchToFlatShading();
 
 	std::vector<float> points{0.0, 0.0, 0.0};
@@ -235,8 +243,17 @@ void drawScene()
 		float x = cos(a) * 3.f * size_grid;
 		float y = sin(a) * 3.f * size_grid;
 		myEngine.setLightPosition({x, y, 5.f * size_grid,1.f},0);
-		// Lampadère
-		// myEngine.setLightPosition({-0.2f * size_grid, 0.9f * size_grid, 0.585f * size_grid, 1.f}, 1);
+
+		// Les lampadères
+		int lightIndex = 1;
+        for (const auto &position : lampPos) {
+            float lampX = (position[0] * size_grid) + (size_grid / 2.0f);
+			float lampY = (position[1] * size_grid) + (size_grid / 2.0f);
+			float lampZ = 0.585f * size_grid;
+            myEngine.setLightPosition({lampX, lampY, lampZ, 1.f}, lightIndex);
+            
+            lightIndex++;
+        }
 	}
 	myEngine.setFlatColor(0.2, 0.0, 0.0);
 	// Car le modèle phong utilise une matrice pour calculer les normales : il faut l'update

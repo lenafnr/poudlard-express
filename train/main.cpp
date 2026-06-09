@@ -171,9 +171,9 @@ int main(int /*argc*/, char ** /*argv*/)
 	onWindowResized(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 	CHECK_GL;
 
-	initScene();
-
 	initJson();
+
+	initScene();
 
 	double elapsedTime{0.0};
 
