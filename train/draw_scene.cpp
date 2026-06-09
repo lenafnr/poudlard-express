@@ -135,11 +135,11 @@ void initScene()
 	// Lampadères
 	int lightIndex = 1;
     for (const auto &position : lampPos) {
-        float lampX = (position[0] * size_grid) + (size_grid / 2.0f);
-        float lampY = (position[1] * size_grid) + (size_grid / 2.0f);
+		float lampX = ((position[0] + 0.2f) * size_grid) + (size_grid / 2.0f);
+		float lampY = ((position[1] + 0.85f) * size_grid) + (size_grid / 2.0f);
         float lampZ = 0.585f * size_grid;
         
-        myEngine.addALight({lampX, lampY, lampZ, 1.f}, {50.f, 50.f, 50.f});
+        myEngine.addALight({lampX, lampY, lampZ, 1.f}, {30.f, 30.f, 30.f});
         lightIndex++;
     }
 	myEngine.switchToFlatShading();
@@ -247,8 +247,8 @@ void drawScene()
 		// Les lampadères
 		int lightIndex = 1;
         for (const auto &position : lampPos) {
-            float lampX = (position[0] * size_grid) + (size_grid / 2.0f);
-			float lampY = (position[1] * size_grid) + (size_grid / 2.0f);
+            float lampX = ((position[0] + 0.2f) * size_grid) + (size_grid / 2.0f);
+			float lampY = ((position[1] + 0.85f) * size_grid) + (size_grid / 2.0f);
 			float lampZ = 0.585f * size_grid;
             myEngine.setLightPosition({lampX, lampY, lampZ, 1.f}, lightIndex);
             
@@ -275,8 +275,7 @@ void drawScene()
 	station();
 	myEngine.mvMatrixStack.popMatrix();
 	drawRect();
-	if (phong_lightning)
-	{
+	if (phong_lightning) {
 		myEngine.switchToFlatShading();
 	}
 }
