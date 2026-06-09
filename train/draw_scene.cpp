@@ -113,7 +113,8 @@ void initScene()
 	myEngine.switchToPhongShading();
 	myEngine.setLightPosition({3.0f * size_grid, 0.f, 5.0f * size_grid, 1.f}, 0);
 	myEngine.setLightIntensity({2000.f, 2000.f, 2000.f});
-	// myEngine.setConeLight({1.f, 1.f, 0.f}, M_PI / 4, 0);
+	// Lampadère
+	// myEngine.addALight({-0.2f * size_grid, 0.9f * size_grid, 0.585f * size_grid, 1.f},{20.f,20.f,20.f});
 	myEngine.switchToFlatShading();
 
 	std::vector<float> points{0.0, 0.0, 0.0};
@@ -302,6 +303,8 @@ void drawScene()
 		float x = cos(a) * 3.f * size_grid;
 		float y = sin(a) * 3.f * size_grid;
 		myEngine.setLightPosition({x, y, 5.f * size_grid,1.f},0);
+		// Lampadère
+		// myEngine.setLightPosition({-0.2f * size_grid, 0.9f * size_grid, 0.585f * size_grid, 1.f}, 1);
 	}
 	myEngine.setFlatColor(0.2, 0.0, 0.0);
 	// Car le modèle phong utilise une matrice pour calculer les normales : il faut l'update
