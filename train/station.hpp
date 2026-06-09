@@ -1,5 +1,6 @@
 #pragma once
 #include "draw_scene.hpp"
+#include "texture_manager.hpp"
 
 void station();
 void bench();
@@ -9,3 +10,4 @@ void roofStation();
 void pannelStation();
 void lamp();
 void books();
+void lampsPlacement();

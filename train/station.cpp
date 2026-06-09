@@ -1,4 +1,5 @@
 #include "station.hpp"
+#include <array>
 
 const float U = size_grid;
 
@@ -161,25 +162,25 @@ void pannelStation()
     }
 
     myEngine.mvMatrixStack.pushMatrix();
-        myEngine.mvMatrixStack.addTranslation({0.799f * U, 0.5f * U, 0.575f * U});
-        myEngine.mvMatrixStack.addRotation(-M_PI/2, {1,0,0});
-        myEngine.mvMatrixStack.addHomothety({0.01f * U, 0.1742f * U, 0.1742f * U});
-        myEngine.updateMvMatrix();
-        myEngine.activateTexturing(true);
-        texturePlatform.attachTexture();
-        myEngine.setFlatColor(1.f,1.f,1.f);
-        sphere->draw();
-        texturePlatform.detachTexture();
-        myEngine.activateTexturing(false);
+    myEngine.mvMatrixStack.addTranslation({0.799f * U, 0.5f * U, 0.575f * U});
+    myEngine.mvMatrixStack.addRotation(-M_PI / 2, {1, 0, 0});
+    myEngine.mvMatrixStack.addHomothety({0.01f * U, 0.1742f * U, 0.1742f * U});
+    myEngine.updateMvMatrix();
+    myEngine.activateTexturing(true);
+    texturePlatform.attachTexture();
+    myEngine.setFlatColor(1.f, 1.f, 1.f);
+    sphere->draw();
+    texturePlatform.detachTexture();
+    myEngine.activateTexturing(false);
     myEngine.mvMatrixStack.popMatrix();
 }
 
 void lamp()
 {
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.2f * U, 0.85f * U, 0.1f * U});
+    myEngine.mvMatrixStack.addTranslation({0.2f * U, 0.85f * U, 0});
     myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.0f, 0.0f, 0.0f});
-    myEngine.mvMatrixStack.addHomothety({0.025f * U, 0.40f * U, 0.025f * U});
+    myEngine.mvMatrixStack.addHomothety({0.025f * U, 0.50f * U, 0.025f * U});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.0f, 0.0f, 0.0f);
     cyl->draw();
@@ -238,6 +239,26 @@ void books()
         if (i == 1)
             myEngine.setFlatColor(0.075f, 0.29f, 0.063f);
         cube->draw();
+        myEngine.mvMatrixStack.popMatrix();
+    }
+}
+
+void lampsPlacement()
+{
+    int size{int(lampPos.size())};
+
+    for (int i = 0; i < size; i++)
+    {
+        std::array<int, 2> position = lampPos[i];
+
+        float translationX = (position[0] * size_grid) + (size_grid / 2.0f);
+        float translationY = (position[1] * size_grid) + (size_grid / 2.0f);
+
+        myEngine.mvMatrixStack.pushMatrix();
+        myEngine.mvMatrixStack.addTranslation({translationX, translationY, 0});
+        myEngine.mvMatrixStack.addHomothety({0.2f * size_grid, 0.2f * size_grid, 0.2f * size_grid});
+        myEngine.updateMvMatrix();
+        lamp();
         myEngine.mvMatrixStack.popMatrix();
     }
 }

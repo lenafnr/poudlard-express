@@ -22,8 +22,8 @@ static float aspectRatio = 1.0f;
 
 // Position initiale
 
-FPSCamera cameraFPS(Vector3D(0.0f, -30.0f, 10.0f),
-					Vector3D(0.0f, 1.0f, 0.0f),
+FPSCamera cameraFPS(Vector3D(-12.0f, 0.0f, 5.0f),
+					Vector3D(1.0f, 0.0f, 0.0f),
 					Vector3D(0.0f, 0.0f, 1.0f));
 
 /* Minimal time wanted between two images */
@@ -67,7 +67,7 @@ void onKey(GLFWwindow *window, int key, int /*scancode*/, int action, int /*mods
 	case GLFW_KEY_T:
 		if (is_pressed)
 		{
-			cameraFPS.reinitPosCam(Vector3D(0.0f, 0.0f, 100.0f),
+			cameraFPS.reinitPosCam(Vector3D(0.0f, 0.0f, 70.0f),
 								   Vector3D(0.0f, 0.0f, -1.0f),
 								   Vector3D(0.0f, 1.0f, 0.0f));
 		}
@@ -76,10 +76,10 @@ void onKey(GLFWwindow *window, int key, int /*scancode*/, int action, int /*mods
 	case GLFW_KEY_H:
 		if (is_pressed)
 		{
-			cameraFPS.reinitPosCam(Vector3D(0.0f, -30.0f, 10.0f),
-								   Vector3D(0.0f, 1.0f, 0.0f),
+			cameraFPS.reinitPosCam(Vector3D(-12.0f, 0.0f, 5.0f),
+								   Vector3D(1.0f, 0.0f, 0.0f),
 								   Vector3D(0.0f, 0.0f, 1.0f));
-		}  
+		}
 		break;
 	case GLFW_KEY_LEFT:
 		cameraFPS.lookLeft(speednessHead);
@@ -105,11 +105,13 @@ void onKey(GLFWwindow *window, int key, int /*scancode*/, int action, int /*mods
 	case GLFW_KEY_D:
 		cameraFPS.stepRight(speednessFoot);
 		break;
-		case GLFW_KEY_J :
-			if (is_pressed) {
-				phong_lightning = !phong_lightning;
-			}
-       		break;	default:
+	case GLFW_KEY_J:
+		if (is_pressed)
+		{
+			phong_lightning = !phong_lightning;
+		}
+		break;
+	default:
 		std::cerr << "Touche non gérée " << key << std::endl;
 	}
 }
@@ -183,9 +185,9 @@ int main(int /*argc*/, char ** /*argv*/)
 
 		/* Render begins here */
 		if (phong_lightning)
-			glClearColor(0.f,0.0f,0.0f,0.0f);
+			glClearColor(0.f, 0.0f, 0.0f, 0.0f);
 		else
-			glClearColor(0.f,0.5f,0.5f,0.0f);
+			glClearColor(0.f, 0.5f, 0.5f, 0.0f);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);

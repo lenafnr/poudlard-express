@@ -19,17 +19,6 @@ extern float sx;
 extern float sr;
 extern float size_grid;
 /* OpenGL Engine */
-extern GLBI_Texture textureGold;
-extern GLBI_Texture textureCloud;
-extern GLBI_Texture texturePlatform;
-
-extern GLBI_Texture textureNx;
-extern GLBI_Texture textureNy;
-extern GLBI_Texture textureNz;
-extern GLBI_Texture texturePx;
-extern GLBI_Texture texturePy;
-extern GLBI_Texture texturePz;
-
 extern GLBI_Engine myEngine;
 extern IndexedMesh* sphere;
 extern IndexedMesh* cube;
@@ -44,6 +33,10 @@ extern void closedCylinder();
 
 extern std::array<int,2> stationPos;
 extern std::vector<std::array<int,2>> railsPos;
+extern std::vector<std::array<int, 2>> treesPos;
+extern std::vector<std::array<int, 2>> pinePos;
+extern std::vector<std::array<int, 2>> lampPos;
+
 extern bool phong_lightning;
 
 void initScene();
