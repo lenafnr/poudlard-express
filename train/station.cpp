@@ -198,7 +198,7 @@ void lamp()
     myEngine.mvMatrixStack.addTranslation({0.2f * U, 0.85f * U, 0.585f * U});
     myEngine.mvMatrixStack.addHomothety({0.1f * U, 0.1f * U, 0.13f * U});
     myEngine.updateMvMatrix();
-    myEngine.setFlatColor(1.f, 0.9f, 0.8f);
+    myEngine.setFlatColor(1.f, 1.f, 1.f);
     cube->draw();
     myEngine.mvMatrixStack.popMatrix();
 

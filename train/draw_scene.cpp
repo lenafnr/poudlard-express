@@ -133,11 +133,14 @@ void initScene()
 	myEngine.setLightPosition({3.0f * size_grid, 0.f, 5.0f * size_grid, 1.f}, 0);
 	myEngine.setLightIntensity({2000.f, 2000.f, 2000.f});
 	// Lampadères
-	int lightIndex = 1;
+	// Lampadère de la gare
+	myEngine.addALight({(stationPos[0] + 0.2f) * size_grid, (stationPos[1] + 0.85f) * size_grid, 0.585f * size_grid, 1.f}, {30.f, 30.f, 30.f});
+	// Lampadères du circuit
+	int lightIndex = 2;
     for (const auto &position : lampPos) {
 		float lampX = ((position[0] + 0.2f) * size_grid) + (size_grid / 2.0f);
-		float lampY = ((position[1] + 0.85f) * size_grid) + (size_grid / 2.0f);
-        float lampZ = 0.585f * size_grid;
+		float lampY = ((position[1] + 0.85f) * size_grid) + (size_grid);
+        float lampZ = 1.f * size_grid;
         
         myEngine.addALight({lampX, lampY, lampZ, 1.f}, {30.f, 30.f, 30.f});
         lightIndex++;
@@ -220,7 +223,7 @@ int angle{};
 void drawScene()
 {
 	glPointSize(10.0);
-
+	
 	myEngine.activateTexturing(false);
 
 	// La lune
@@ -245,11 +248,14 @@ void drawScene()
 		myEngine.setLightPosition({x, y, 5.f * size_grid,1.f},0);
 
 		// Les lampadères
-		int lightIndex = 1;
+		// Lampadère de la gare
+		myEngine.setLightPosition({(stationPos[0] + 0.2f) * size_grid, (stationPos[1] + 0.85f) * size_grid, 0.585f * size_grid, 1.f}, 1);
+		// Lampadères du circuit
+		int lightIndex = 2;
         for (const auto &position : lampPos) {
             float lampX = ((position[0] + 0.2f) * size_grid) + (size_grid / 2.0f);
-			float lampY = ((position[1] + 0.85f) * size_grid) + (size_grid / 2.0f);
-			float lampZ = 0.585f * size_grid;
+			float lampY = ((position[1] + 0.85f) * size_grid) + (size_grid);
+			float lampZ = 1.f * size_grid;
             myEngine.setLightPosition({lampX, lampY, lampZ, 1.f}, lightIndex);
             
             lightIndex++;
