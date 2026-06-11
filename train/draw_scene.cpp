@@ -9,19 +9,6 @@
 #include "texture_manager.hpp"
 #include "objects.hpp"
 
-GLBI_Engine myEngine;
-GLBI_Set_Of_Points somePoints(3);
-GLBI_Convex_2D_Shape ground{3};
-GLBI_Convex_2D_Shape arc{3};
-GLBI_Convex_2D_Shape circle;
-StandardMesh *rectangle;
-StandardMesh *repere = NULL;
-IndexedMesh *sphere;
-IndexedMesh *cyl;
-IndexedMesh *cube;
-IndexedMesh *disk;
-StandardMesh *cone;
-
 float rr{0.05f * size_grid};
 float sx{0.05f * size_grid};
 float sr{0.1f * size_grid};
@@ -94,7 +81,7 @@ void initScene()
 	// Initialisation de la lumière (lune)
 	myEngine.switchToPhongShading();
 	myEngine.setLightPosition({3.0f * size_grid, 0.f, 5.0f * size_grid, 1.f}, 0);
-	myEngine.setLightIntensity({1800.f, 1800.f, 1800.f});
+	myEngine.setLightIntensity({1500.f, 1500.f, 1500.f});
 	// Lampadaires
 	// Lampadaire de la gare
 	myEngine.addALight({(stationPos[0] + 0.2f) * size_grid, (stationPos[1] + 0.85f) * size_grid, 0.585f * size_grid, 1.f}, {30.f, 30.f, 30.f});

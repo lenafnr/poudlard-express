@@ -1,5 +1,5 @@
 #pragma once
-#include "draw_scene.hpp"
+#include "objects.hpp"
 #include <array>
 
 void pine();

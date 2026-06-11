@@ -1,5 +1,5 @@
 #pragma once
-#include "draw_scene.hpp"
+#include "objects.hpp"
 
 void rails_straight();
 void rails_curved();

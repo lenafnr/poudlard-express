@@ -6,6 +6,7 @@
 #include "draw_scene.hpp"
 #include "tools/shaders.hpp"
 #include "tools/camera.hpp"
+#include "objects.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "tools/stb_image.h"

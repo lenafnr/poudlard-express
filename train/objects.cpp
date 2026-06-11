@@ -1,5 +1,18 @@
 #include "objects.hpp"
 
+GLBI_Engine myEngine;
+GLBI_Set_Of_Points somePoints(3);
+GLBI_Convex_2D_Shape ground{3};
+GLBI_Convex_2D_Shape arc{3};
+GLBI_Convex_2D_Shape circle;
+StandardMesh *rectangle;
+StandardMesh *repere = NULL;
+IndexedMesh *sphere;
+IndexedMesh *cyl;
+IndexedMesh *cube;
+IndexedMesh *disk;
+StandardMesh *cone;
+
 std::vector<float> pointCircle{};
 void createCircle(float r)
 {
