@@ -28,5 +28,4 @@ extern std::vector<std::array<int, 2>> lampPos;
 extern bool phong_lightning;
 
 void initScene();
-void initJson();
 void drawScene();
