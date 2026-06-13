@@ -9,15 +9,16 @@
 #include "objects.hpp"
 #include "json_manager.hpp"
 
+float size_grid{10.f};
 float rr{0.05f * size_grid};
 float sx{0.05f * size_grid};
 float sr{0.1f * size_grid};
-float size_grid{10.f};
 int angle{};
 bool phong_lightning = true;
 
 void initScene()
 {
+	initJson();
 	// Initialisation de la lumière (lune)
 	myEngine.switchToPhongShading();
 	myEngine.setLightPosition({3.0f * size_grid, 0.f, 5.0f * size_grid, 1.f}, 0);
@@ -36,7 +37,6 @@ void initScene()
 	myEngine.switchToFlatShading();
 	initAllObjects();
 	loadAllTextures();
-	initJson();
 }
 
 void drawScene()
