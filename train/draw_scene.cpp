@@ -89,7 +89,8 @@ void drawScene()
 	lampsPlacement();
 	// treesPlacement();
 	myEngine.mvMatrixStack.pushMatrix();
-	myEngine.mvMatrixStack.addTranslation({2.f * size_grid, 2.f * size_grid, 0});
+	myEngine.mvMatrixStack.addTranslation({2.f * size_grid, 0.1f * size_grid, 0.2f * size_grid});
+	myEngine.mvMatrixStack.addRotation(M_PI /2 , {0.0f, 0.0f, 1.0f});
 	myEngine.updateMvMatrix();
 	train();
 	myEngine.mvMatrixStack.popMatrix();

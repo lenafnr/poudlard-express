@@ -14,7 +14,7 @@ void wheels() {
                     myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 0.f, 1.f});
                 myEngine.mvMatrixStack.addHomothety({big_radius, 0.05f * size_grid, big_radius});
                 myEngine.updateMvMatrix();
-                myEngine.setFlatColor(0.5,0.5,0.5);
+                myEngine.setFlatColor(0.263f, 0.263f, 0.263f);
                 closedCylinder();
             myEngine.mvMatrixStack.popMatrix();
         }
@@ -28,7 +28,7 @@ void wheels() {
                     myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 0.f, 1.f});
                 myEngine.mvMatrixStack.addHomothety({little_radius, 0.5f, little_radius});
                 myEngine.updateMvMatrix();
-                myEngine.setFlatColor(0.5,0.5,0.5);
+                myEngine.setFlatColor(0.263f, 0.263f, 0.263f);
                 closedCylinder();
             myEngine.mvMatrixStack.popMatrix();
         }
