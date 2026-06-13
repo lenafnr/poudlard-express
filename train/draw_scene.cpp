@@ -8,6 +8,7 @@
 #include "texture_manager.hpp"
 #include "objects.hpp"
 #include "json_manager.hpp"
+#include "light_manager.hpp"
 
 float size_grid{10.f};
 float rr{0.05f * size_grid};
@@ -19,22 +20,7 @@ bool phong_lightning = true;
 void initScene()
 {
 	initJson();
-	// Initialisation de la lumière (lune)
-	myEngine.switchToPhongShading();
-	myEngine.setLightPosition({3.0f * size_grid, 0.f, 5.0f * size_grid, 1.f}, 0);
-	myEngine.setLightIntensity({1500.f, 1500.f, 1500.f});
-	// Lampadaires
-	// Lampadaire de la gare
-	myEngine.addALight({(stationPos[0] + 0.2f) * size_grid, (stationPos[1] + 0.85f) * size_grid, 0.585f * size_grid, 1.f}, {30.f, 30.f, 30.f});
-	// Lampadaires du circuit
-    for (const auto &position : lampPos) {
-		float lampX = ((position[0] + 0.2f) * size_grid) + (size_grid / 2.0f);
-		float lampY = ((position[1] + 0.85f) * size_grid) + (size_grid);
-        float lampZ = 1.f * size_grid;
-        
-        myEngine.addALight({lampX, lampY, lampZ, 1.f}, {30.f, 30.f, 30.f});
-    }
-	myEngine.switchToFlatShading();
+	initLights();
 	initAllObjects();
 	loadAllTextures();
 }
@@ -49,36 +35,15 @@ void drawScene()
 	if (phong_lightning)
 	{
 		myEngine.mvMatrixStack.pushMatrix();
-		myEngine.mvMatrixStack.addRotation(M_PI * angle / 180, {0.0, 0.0, 1.0});
-		myEngine.mvMatrixStack.addTranslation({3.0f * size_grid, 0.f, 5.0f * size_grid});
-		myEngine.mvMatrixStack.addHomothety({2.f, 2.f, 2.f});
-		myEngine.updateMvMatrix();
-		myEngine.setFlatColor(0.5f, 0.5f, 0.5f);
-		sphere->draw();
-		angle++;
+			myEngine.mvMatrixStack.addRotation(M_PI * angle / 180, {0.0, 0.0, 1.0});
+			myEngine.mvMatrixStack.addTranslation({3.0f * size_grid, 0.f, 5.0f * size_grid});
+			myEngine.mvMatrixStack.addHomothety({2.f, 2.f, 2.f});
+			myEngine.updateMvMatrix();
+			myEngine.setFlatColor(0.5f, 0.5f, 0.5f);
+			sphere->draw();
 		myEngine.mvMatrixStack.popMatrix();
-
-		// On illumine la scène
-		myEngine.switchToPhongShading();
-		// On fait tourner la lumière avec la sphère
-		float a = M_PI * angle / 180.f;
-		float x = cos(a) * 3.f * size_grid;
-		float y = sin(a) * 3.f * size_grid;
-		myEngine.setLightPosition({x, y, 5.f * size_grid,1.f},0);
-
-		// Les lampadaires
-		// Lampadaire de la gare
-		myEngine.setLightPosition({(stationPos[0] + 0.2f) * size_grid, (stationPos[1] + 0.85f) * size_grid, 0.585f * size_grid, 1.f}, 1);
-		// Lampadaires du circuit
-		int lightIndex = 2;
-        for (const auto &position : lampPos) {
-            float lampX = ((position[0] + 0.2f) * size_grid) + (size_grid / 2.0f);
-			float lampY = ((position[1] + 0.85f) * size_grid) + (size_grid);
-			float lampZ = 1.f * size_grid;
-            myEngine.setLightPosition({lampX, lampY, lampZ, 1.f}, lightIndex);
-            
-            lightIndex++;
-        }
+		updateLight(angle);
+		angle++;
 	}
 	myEngine.setFlatColor(0.2, 0.0, 0.0);
 	// Car le modèle phong utilise une matrice pour calculer les normales : il faut l'update

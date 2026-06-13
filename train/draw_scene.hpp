@@ -22,4 +22,5 @@ extern float size_grid;
 extern bool phong_lightning;
 
 void initScene();
+
 void drawScene();
