@@ -163,9 +163,6 @@ int main(int /*argc*/, char ** /*argv*/)
 	myEngine.initGL();
 	onWindowResized(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 	CHECK_GL;
-
-	initJson();
-
 	initScene();
 
 	double elapsedTime{0.0};
