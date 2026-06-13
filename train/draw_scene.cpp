@@ -13,7 +13,7 @@ float rr{0.05f * size_grid};
 float sx{0.05f * size_grid};
 float sr{0.1f * size_grid};
 float size_grid{10.f};
-
+int angle{};
 bool phong_lightning = true;
 
 using json = nlohmann::json;
@@ -98,7 +98,6 @@ void initScene()
 	loadAllTextures();
 }
 
-int angle{};
 void drawScene()
 {
 	glPointSize(10.0);
