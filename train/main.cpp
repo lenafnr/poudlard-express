@@ -57,14 +57,6 @@ void onKey(GLFWwindow *window, int key, int /*scancode*/, int action, int /*mods
 	case GLFW_KEY_ESCAPE:
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 		break;
-	case GLFW_KEY_L:
-		if (is_pressed)
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		break;
-	case GLFW_KEY_P:
-		if (is_pressed)
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		break;
 	case GLFW_KEY_T:
 		if (is_pressed)
 		{
