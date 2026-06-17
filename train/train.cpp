@@ -26,7 +26,7 @@ void wheels() {
                 myEngine.mvMatrixStack.addTranslation({(0.7f + i) * size_grid, (0.25f + j) * size_grid, little_radius});
                 if (j > 0.f)
                     myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 0.f, 1.f});
-                myEngine.mvMatrixStack.addHomothety({little_radius, 0.5f, little_radius});
+                myEngine.mvMatrixStack.addHomothety({little_radius, 0.05f * size_grid, little_radius});
                 myEngine.updateMvMatrix();
                 myEngine.setFlatColor(0.263f, 0.263f, 0.263f);
                 closedCylinder();

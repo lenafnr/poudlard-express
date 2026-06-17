@@ -1,5 +1,6 @@
 #pragma once
 #include "draw_scene.hpp"
+#include "json_manager.hpp"
 
 /* OpenGL Engine */
 extern GLBI_Engine myEngine;

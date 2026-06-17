@@ -3,6 +3,7 @@
 
 using json = nlohmann::json;
 
+float size_grid{};
 std::array<int, 2> stationPos{};
 std::vector<std::array<int, 2>> railsPos{};
 std::vector<std::array<int, 2>> treesPos{};

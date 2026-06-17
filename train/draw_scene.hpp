@@ -17,7 +17,6 @@ static const float Z_FAR {500.f};
 extern float rr ;
 extern float sx;
 extern float sr;
-extern float size_grid;
 
 extern bool phong_lightning;
 

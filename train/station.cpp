@@ -1,23 +1,21 @@
 #include "station.hpp"
 #include <array>
 
-const float U = size_grid;
-
 void bench()
 {
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.6f * U, 0.5f * U, 0.225f * U});
-    myEngine.mvMatrixStack.addHomothety({0.2f * U, 0.6f * U, 0.05f * U});
+    myEngine.mvMatrixStack.addTranslation({0.6f * size_grid, 0.5f * size_grid, 0.225f * size_grid});
+    myEngine.mvMatrixStack.addHomothety({0.2f * size_grid, 0.6f * size_grid, 0.05f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.357f, 0.188f, 0.02f);
     cube->draw();
     myEngine.mvMatrixStack.popMatrix();
 
-    const float baseX = 0.525f * U;
-    const float baseY = 0.25f * U;
+    const float baseX = 0.525f * size_grid;
+    const float baseY = 0.25f * size_grid;
 
-    const float stepX = 0.15f * U;
-    const float stepY = 0.5f * U;
+    const float stepX = 0.15f * size_grid;
+    const float stepY = 0.5f * size_grid;
 
     for (int i = 0; i < 2; i++)
     {
@@ -27,8 +25,8 @@ void bench()
             float translationY = baseY + j * stepY;
 
             myEngine.mvMatrixStack.pushMatrix();
-            myEngine.mvMatrixStack.addTranslation({translationX, translationY, 0.15f * U});
-            myEngine.mvMatrixStack.addHomothety({0.05f * U, 0.05f * U, 0.1f * U});
+            myEngine.mvMatrixStack.addTranslation({translationX, translationY, 0.15f * size_grid});
+            myEngine.mvMatrixStack.addHomothety({0.05f * size_grid, 0.05f * size_grid, 0.1f * size_grid});
             myEngine.updateMvMatrix();
             myEngine.setFlatColor(0.0f, 0.0f, 0.0f);
             cube->draw();
@@ -40,8 +38,8 @@ void bench()
 void groundStation()
 {
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.5f * U, 0.5f * U, 0.05f * U});
-    myEngine.mvMatrixStack.addHomothety({1.0f * U, 1.0f * U, 0.1f * U});
+    myEngine.mvMatrixStack.addTranslation({0.5f * size_grid, 0.5f * size_grid, 0.05f * size_grid});
+    myEngine.mvMatrixStack.addHomothety({1.0f * size_grid, 1.0f * size_grid, 0.1f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.486f, 0.486f, 0.486f);
     cube->draw();
@@ -50,11 +48,11 @@ void groundStation()
 
 void wallStation()
 {
-    const float baseY = 0.15f * U;
-    const float baseZ = 0.125f * U;
+    const float baseY = 0.15f * size_grid;
+    const float baseZ = 0.125f * size_grid;
 
-    const float stepY = 0.1f * U;
-    const float stepZ = 0.05f * U;
+    const float stepY = 0.1f * size_grid;
+    const float stepZ = 0.05f * size_grid;
 
     for (int i = 0; i < 8; i++)
     {
@@ -64,8 +62,8 @@ void wallStation()
             float translationZ = baseZ + j * stepZ;
 
             myEngine.mvMatrixStack.pushMatrix();
-            myEngine.mvMatrixStack.addTranslation({0.95f * U, transaltionY, translationZ});
-            myEngine.mvMatrixStack.addHomothety({0.1f * U, 0.1f * U, 0.05f * U});
+            myEngine.mvMatrixStack.addTranslation({0.95f * size_grid, transaltionY, translationZ});
+            myEngine.mvMatrixStack.addHomothety({0.1f * size_grid, 0.1f * size_grid, 0.05f * size_grid});
             myEngine.updateMvMatrix();
 
             if ((i + j) % 2 == 0)
@@ -83,18 +81,18 @@ void wallStation()
     }
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.0f * U, 1.0f * U, 0.2f * U});
+    myEngine.mvMatrixStack.addTranslation({0.0f * size_grid, 1.0f * size_grid, 0.2f * size_grid});
     myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.0f, 0.0f, 0.0f});
-    myEngine.mvMatrixStack.addHomothety({1.0f * U, 0.80f * U, 0.0f * U});
+    myEngine.mvMatrixStack.addHomothety({1.0f * size_grid, 0.80f * size_grid, 0.0f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.263f, 0.263f, 0.263f);
     arc.drawShape();
     myEngine.mvMatrixStack.popMatrix();
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.0f * U, 0.0f * U, 0.2f * U});
+    myEngine.mvMatrixStack.addTranslation({0.0f * size_grid, 0.0f * size_grid, 0.2f * size_grid});
     myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.0f, 0.0f, 0.0f});
-    myEngine.mvMatrixStack.addHomothety({1.0f * U, 0.80f * U, 0.0f * U});
+    myEngine.mvMatrixStack.addHomothety({1.0f * size_grid, 0.80f * size_grid, 0.0f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.263f, 0.263f, 0.263f);
     arc.drawShape();
@@ -104,23 +102,23 @@ void wallStation()
 void roofStation()
 {
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.5f * U, 0.5f * U, 0.95f * U});
-    myEngine.mvMatrixStack.addHomothety({1.0f * U, 1.0f * U, 0.1f * U});
+    myEngine.mvMatrixStack.addTranslation({0.5f * size_grid, 0.5f * size_grid, 0.95f * size_grid});
+    myEngine.mvMatrixStack.addHomothety({1.0f * size_grid, 1.0f * size_grid, 0.1f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.263f, 0.263f, 0.263f);
     cube->draw();
     myEngine.mvMatrixStack.popMatrix();
 
-    const float baseY = 0.05f * U;
-    const float stepY = 0.9f * U;
+    const float baseY = 0.05f * size_grid;
+    const float stepY = 0.9f * size_grid;
 
     for (int i = 0; i < 2; i++)
     {
         float transaltionY = baseY + i * stepY;
 
         myEngine.mvMatrixStack.pushMatrix();
-        myEngine.mvMatrixStack.addTranslation({0.95f * U, transaltionY, 0.5f * U});
-        myEngine.mvMatrixStack.addHomothety({0.1f * U, 0.1f * U, 0.8f * U});
+        myEngine.mvMatrixStack.addTranslation({0.95f * size_grid, transaltionY, 0.5f * size_grid});
+        myEngine.mvMatrixStack.addHomothety({0.1f * size_grid, 0.1f * size_grid, 0.8f * size_grid});
         myEngine.updateMvMatrix();
         myEngine.setFlatColor(0.263f, 0.263f, 0.263f);
         cube->draw();
@@ -131,18 +129,18 @@ void roofStation()
 void pannelStation()
 {
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.825f * U, 0.5f * U, 0.575f * U});
-    myEngine.mvMatrixStack.addHomothety({0.05f * U, 0.6f * U, 0.45f * U});
+    myEngine.mvMatrixStack.addTranslation({0.825f * size_grid, 0.5f * size_grid, 0.575f * size_grid});
+    myEngine.mvMatrixStack.addHomothety({0.05f * size_grid, 0.6f * size_grid, 0.45f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.565f, 0.055f, 0.063f);
     cube->draw();
     myEngine.mvMatrixStack.popMatrix();
 
-    const float baseY = 0.3f * U;
-    const float baseZ = 0.475f * U;
+    const float baseY = 0.3f * size_grid;
+    const float baseZ = 0.475f * size_grid;
 
-    const float stepY = 0.4f * U;
-    const float stepZ = 0.2f * U;
+    const float stepY = 0.4f * size_grid;
+    const float stepZ = 0.2f * size_grid;
 
     for (int i = 0; i < 2; i++)
     {
@@ -152,8 +150,8 @@ void pannelStation()
             float translationZ = baseZ + j * stepZ;
 
             myEngine.mvMatrixStack.pushMatrix();
-            myEngine.mvMatrixStack.addTranslation({0.875f * U, transaltionY, translationZ});
-            myEngine.mvMatrixStack.addHomothety({0.05f * U, 0.05f * U, 0.05f * U});
+            myEngine.mvMatrixStack.addTranslation({0.875f * size_grid, transaltionY, translationZ});
+            myEngine.mvMatrixStack.addHomothety({0.05f * size_grid, 0.05f * size_grid, 0.05f * size_grid});
             myEngine.updateMvMatrix();
             myEngine.setFlatColor(0.0f, 0.0f, 0.0f);
             cube->draw();
@@ -162,9 +160,9 @@ void pannelStation()
     }
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.799f * U, 0.5f * U, 0.575f * U});
+    myEngine.mvMatrixStack.addTranslation({0.799f * size_grid, 0.5f * size_grid, 0.575f * size_grid});
     myEngine.mvMatrixStack.addRotation(-M_PI / 2, {1, 0, 0});
-    myEngine.mvMatrixStack.addHomothety({0.01f * U, 0.1742f * U, 0.1742f * U});
+    myEngine.mvMatrixStack.addHomothety({0.01f * size_grid, 0.1742f * size_grid, 0.1742f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.activateTexturing(true);
     texturePlatform.attachTexture();
@@ -178,41 +176,41 @@ void pannelStation()
 void lamp()
 {
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.2f * U, 0.85f * U, 0});
+    myEngine.mvMatrixStack.addTranslation({0.2f * size_grid, 0.85f * size_grid, 0});
     myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.0f, 0.0f, 0.0f});
-    myEngine.mvMatrixStack.addHomothety({0.025f * U, 0.50f * U, 0.025f * U});
+    myEngine.mvMatrixStack.addHomothety({0.025f * size_grid, 0.50f * size_grid, 0.025f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.0f, 0.0f, 0.0f);
     cyl->draw();
     myEngine.mvMatrixStack.popMatrix();
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.2f * U, 0.85f * U, 0.51f * U});
-    myEngine.mvMatrixStack.addHomothety({0.15f * U, 0.15f * U, 0.02f * U});
+    myEngine.mvMatrixStack.addTranslation({0.2f * size_grid, 0.85f * size_grid, 0.51f * size_grid});
+    myEngine.mvMatrixStack.addHomothety({0.15f * size_grid, 0.15f * size_grid, 0.02f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.0f, 0.0f, 0.0f);
     cube->draw();
     myEngine.mvMatrixStack.popMatrix();
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.2f * U, 0.85f * U, 0.585f * U});
-    myEngine.mvMatrixStack.addHomothety({0.1f * U, 0.1f * U, 0.13f * U});
+    myEngine.mvMatrixStack.addTranslation({0.2f * size_grid, 0.85f * size_grid, 0.585f * size_grid});
+    myEngine.mvMatrixStack.addHomothety({0.1f * size_grid, 0.1f * size_grid, 0.13f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(1.f, 1.f, 1.f);
     cube->draw();
     myEngine.mvMatrixStack.popMatrix();
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.2f * U, 0.85f * U, 0.66f * U});
-    myEngine.mvMatrixStack.addHomothety({0.15f * U, 0.15f * U, 0.02f * U});
+    myEngine.mvMatrixStack.addTranslation({0.2f * size_grid, 0.85f * size_grid, 0.66f * size_grid});
+    myEngine.mvMatrixStack.addHomothety({0.15f * size_grid, 0.15f * size_grid, 0.02f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.0f, 0.0f, 0.0f);
     cube->draw();
     myEngine.mvMatrixStack.popMatrix();
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({0.2f * U, 0.85f * U, 0.67f * U});
-    myEngine.mvMatrixStack.addHomothety({0.035f * U, 0.035f * U, 0.035f * U});
+    myEngine.mvMatrixStack.addTranslation({0.2f * size_grid, 0.85f * size_grid, 0.67f * size_grid});
+    myEngine.mvMatrixStack.addHomothety({0.035f * size_grid, 0.035f * size_grid, 0.035f * size_grid});
     myEngine.updateMvMatrix();
     myEngine.setFlatColor(0.929f, 0.831f, 0.408f);
     sphere->draw();
@@ -221,16 +219,16 @@ void lamp()
 
 void books()
 {
-    const float baseZ = 0.09f * U;
-    const float stepZ = 0.025f * U;
+    const float baseZ = 0.09f * size_grid;
+    const float stepZ = 0.025f * size_grid;
 
     for (int i = 1; i < 4; i++)
     {
         float translationZ = baseZ + i * stepZ;
         myEngine.mvMatrixStack.pushMatrix();
-        myEngine.mvMatrixStack.addTranslation({0.2f * U, 0.15f * U, translationZ});
+        myEngine.mvMatrixStack.addTranslation({0.2f * size_grid, 0.15f * size_grid, translationZ});
         myEngine.mvMatrixStack.addRotation(M_PI / 6.0f + i * 0.5, {0.0f, 0.0f, 1.0f});
-        myEngine.mvMatrixStack.addHomothety({0.05f * U, 0.09f * U, 0.025f * U});
+        myEngine.mvMatrixStack.addHomothety({0.05f * size_grid, 0.09f * size_grid, 0.025f * size_grid});
         myEngine.updateMvMatrix();
         if (i == 3)
             myEngine.setFlatColor(0.565f, 0.055f, 0.063f);

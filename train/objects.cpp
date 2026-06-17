@@ -50,13 +50,12 @@ void closedCylinder()
 }
 
 void initAllObjects() {
-    	std::vector<float> points{0.0, 0.0, 0.0};
+    std::vector<float> points{0.0, 0.0, 0.0};
 	somePoints.initSet(points, 1.0, 1.0, 1.0);
-
-	std::vector<float> baseCarre{-50.0, -50.0, 0.0,
-								 50.0, -50.0, 0.0,
-								 50.0, 50.0, 0.0,
-								 -50.0, 50.0, 0.0};
+	std::vector<float> baseCarre{-size_grid * 5, -size_grid * 5, 0.0,
+								 size_grid * 5, -size_grid * 5, 0.0,
+								 size_grid * 5, size_grid * 5, 0.0,
+								 -size_grid * 5, size_grid * 5, 0.0};
 
 	myEngine.setNormalForConvex2DShape({0.f, 0.f, 1.f});
 	ground.initShape(baseCarre);

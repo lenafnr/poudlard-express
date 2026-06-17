@@ -3,6 +3,7 @@
 
 void initJson();
 
+extern float size_grid;
 extern std::array<int,2> stationPos;
 extern std::vector<std::array<int,2>> railsPos;
 extern std::vector<std::array<int, 2>> treesPos;

@@ -4,7 +4,7 @@ void drawRect()
 {
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({250.f, 250.f, 250.f});
+    myEngine.mvMatrixStack.addTranslation({25.f * size_grid, 25.f * size_grid, 25.f * size_grid});
     myEngine.mvMatrixStack.addHomothety({50 * size_grid, 1, 50 * size_grid});
     myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 1.f, 0.f});
     myEngine.updateMvMatrix();
@@ -17,7 +17,7 @@ void drawRect()
     myEngine.mvMatrixStack.popMatrix();
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({-250.f, 250.f, 250.f});
+    myEngine.mvMatrixStack.addTranslation({-25.f * size_grid, 25.f * size_grid, 25.f * size_grid});
     myEngine.mvMatrixStack.addRotation(M_PI, {1.f, -1.f, 0.f});
     myEngine.mvMatrixStack.addHomothety({50 * size_grid, 1, 50 * size_grid});
     myEngine.updateMvMatrix();
@@ -30,7 +30,7 @@ void drawRect()
     myEngine.mvMatrixStack.popMatrix();
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({250.f, -250.f, 250.f});
+    myEngine.mvMatrixStack.addTranslation({25.f * size_grid, -25.f * size_grid, 25.f * size_grid});
     myEngine.mvMatrixStack.addRotation(M_PI, {1.f, -1.f, 0.f});
     myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 0.f, 1.f});
     myEngine.mvMatrixStack.addHomothety({50 * size_grid, 1, 50 * size_grid});
@@ -44,7 +44,7 @@ void drawRect()
     myEngine.mvMatrixStack.popMatrix();
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({-250.f, -250.f, 250.f});
+    myEngine.mvMatrixStack.addTranslation({-25.f * size_grid, -25.f * size_grid, 25.f * size_grid});
     myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 1.f, 0.f});
     myEngine.mvMatrixStack.addRotation(M_PI, {0.f, 0.f, 1.f});
     myEngine.mvMatrixStack.addHomothety({50 * size_grid, 1, 50 * size_grid});
@@ -58,7 +58,7 @@ void drawRect()
     myEngine.mvMatrixStack.popMatrix();
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({250.f, 250.f, 250.f});
+    myEngine.mvMatrixStack.addTranslation({25.f * size_grid, 25.f * size_grid, 25.f * size_grid});
     // myEngine.mvMatrixStack.addTranslation({1.f, 0.f, 30.f});
     myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.f, 0.f, 0.f});
     myEngine.mvMatrixStack.addRotation(M_PI / 2, {0.f, -1.f, 0.f});
@@ -74,7 +74,7 @@ void drawRect()
     myEngine.mvMatrixStack.popMatrix();
 
     myEngine.mvMatrixStack.pushMatrix();
-    myEngine.mvMatrixStack.addTranslation({-250.f, 250.f, -250.f});
+    myEngine.mvMatrixStack.addTranslation({-25.f * size_grid, 25.f * size_grid, -25.f * size_grid});
     //myEngine.mvMatrixStack.addTranslation({1.f, 0.f, 1.f});
     myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.f, 0.f, 0.f});
     myEngine.mvMatrixStack.addRotation(M_PI/2  , {0.f, 1.f, 0.f});
