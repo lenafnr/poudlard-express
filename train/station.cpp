@@ -254,7 +254,7 @@ void lampsPlacement()
 
         myEngine.mvMatrixStack.pushMatrix();
         myEngine.mvMatrixStack.addTranslation({translationX, translationY, 0});
-        myEngine.mvMatrixStack.addHomothety({0.2f * size_grid, 0.2f * size_grid, 0.2f * size_grid});
+        myEngine.mvMatrixStack.addHomothety({2.f, 2.f, 2.f});
         myEngine.updateMvMatrix();
         lamp();
         myEngine.mvMatrixStack.popMatrix();

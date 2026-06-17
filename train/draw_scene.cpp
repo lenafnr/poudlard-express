@@ -38,8 +38,8 @@ void drawScene()
 	{
 		myEngine.mvMatrixStack.pushMatrix();
 			myEngine.mvMatrixStack.addRotation(M_PI * angle / 180, {0.0, 0.0, 1.0});
-			myEngine.mvMatrixStack.addTranslation({3.0f * size_grid, 0.f, 5.0f * size_grid});
-			myEngine.mvMatrixStack.addHomothety({2.f, 2.f, 2.f});
+			myEngine.mvMatrixStack.addTranslation({3.0f * size_grid, 0.f, 4.0f * size_grid});
+			myEngine.mvMatrixStack.addHomothety({0.2f * size_grid, 0.2f * size_grid, 0.2f *size_grid});
 			myEngine.updateMvMatrix();
 			myEngine.setFlatColor(0.5f, 0.5f, 0.5f);
 			sphere->draw();

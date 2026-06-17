@@ -17,7 +17,7 @@ using namespace STP3D;
 
 /* Window properties */
 static const unsigned int WINDOW_WIDTH = 1200;
-static const unsigned int WINDOW_HEIGHT = 800;
+static const unsigned int WINDOW_HEIGHT = 1200;
 static const char WINDOW_TITLE[] = "Train Poudlard Express";
 static float aspectRatio = 1.0f;
 
