@@ -373,20 +373,14 @@ void harryPotter()
         float forward = timer + (i * 0.12f);
         forward = fmod(forward, 1.0f);
 
-        float max_y = 1.0f * size_grid;
-        float max_z = 1.0f * size_grid;
-
-        float y = forward * max_y;
-        float z = forward * max_z;
+        float y = forward * size_grid;
+        float z = forward * size_grid;
 
         myEngine.mvMatrixStack.addTranslation({-1.24f * size_grid,
                                                (2.56f * size_grid) + y,
                                                (0.37f * size_grid) + z});
 
         float scale = 0.05f * (1.0f - forward);
-        if (scale < 0.001f)
-            scale = 0.001f;
-
         myEngine.mvMatrixStack.addHomothety({scale * size_grid, scale * size_grid, scale * size_grid});
         myEngine.updateMvMatrix();
         myEngine.setFlatColor(1.f, 0.91f, 0.106f);
