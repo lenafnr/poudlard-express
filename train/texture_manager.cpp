@@ -14,12 +14,17 @@ GLBI_Texture texturePz;
 // Pour alléger la fonction suivante
 static void loadSingleTexture(GLBI_Texture& texture, char const* path) {
 	int x, y, n;
+	// On le charge dans CPU
 	unsigned char *img = stbi_load(path, &x, &y, &n, 4);
 	texture.createTexture();
+	// On fait le lien avec GPU
 	texture.attachTexture();
 	texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	// On le charge dans le GPU
 	texture.loadImage(x, y, 4, img);
+	// On coupe le lien
 	texture.detachTexture();
+	// On libère le CPU
 	stbi_image_free(img);
 }
 
