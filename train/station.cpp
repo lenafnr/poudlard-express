@@ -261,6 +261,142 @@ void lampsPlacement()
     }
 }
 
+float timer = 0.0f;
+
+void harryPotter()
+{
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.2f * size_grid, 2.3f * size_grid, 0.f});
+    myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.0f, 0.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.15f * size_grid, 0.6f * size_grid, 0.15f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(0.f, 0.f, 0.f);
+    cone->draw();
+    myEngine.mvMatrixStack.popMatrix();
+
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.2f * size_grid, 2.3f * size_grid, 0.57f * size_grid});
+    myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.0f, 0.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.12f * size_grid, 0.4f * size_grid, 0.12f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(0.604f, 0.376f, 0.227f);
+    cone->draw();
+    myEngine.mvMatrixStack.popMatrix();
+
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.2f * size_grid, 2.3f * size_grid, 0.5f * size_grid});
+    // myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.0f, 0.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.12f * size_grid, 0.12f * size_grid, 0.12f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(1.f, 0.859f, 0.722f);
+    sphere->draw();
+    myEngine.mvMatrixStack.popMatrix();
+
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.2f * size_grid, 2.3f * size_grid, 0.57f * size_grid});
+    // myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.0f, 0.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.3f * size_grid, 0.3f * size_grid, 0.03f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(0.604f, 0.376f, 0.227f);
+    cube->draw();
+    myEngine.mvMatrixStack.popMatrix();
+
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.33f * size_grid, 2.35f * size_grid, 0.50f * size_grid});
+    // myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.0f, 0.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.01f * size_grid, 0.025f * size_grid, 0.025f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(1.f, 0.859f, 0.722f);
+    sphere->draw();
+    myEngine.mvMatrixStack.popMatrix();
+
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.33f * size_grid, 2.25f * size_grid, 0.50f * size_grid});
+    // myEngine.mvMatrixStack.addRotation(M_PI / 2, {1.0f, 0.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.01f * size_grid, 0.025f * size_grid, 0.025f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(1.f, 0.859f, 0.722f);
+    sphere->draw();
+    myEngine.mvMatrixStack.popMatrix();
+
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.24f * size_grid, 2.4f * size_grid, 0.3f * size_grid});
+    myEngine.mvMatrixStack.addRotation(M_PI / 4, {0.0f, 1.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.03f * size_grid, 0.1f * size_grid, 0.01f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(0.f, 0.f, 0.f);
+    sphere->draw();
+    myEngine.mvMatrixStack.popMatrix();
+
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.32f * size_grid, 2.35f * size_grid, 0.5f * size_grid});
+    myEngine.mvMatrixStack.addRotation(M_PI / 2, {0.0f, 1.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.04f * size_grid, 0.04f * size_grid, 0.04f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(0.f, 0.f, 0.f);
+    circle.drawShape();
+    myEngine.mvMatrixStack.popMatrix();
+
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.32f * size_grid, 2.25f * size_grid, 0.5f * size_grid});
+    myEngine.mvMatrixStack.addRotation(M_PI / 2, {0.0f, 1.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.04f * size_grid, 0.04f * size_grid, 0.04f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(0.f, 0.f, 0.f);
+    circle.drawShape();
+    myEngine.mvMatrixStack.popMatrix();
+
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.32f * size_grid, 2.3f * size_grid, 0.5f * size_grid});
+    // myEngine.mvMatrixStack.addRotation(M_PI / 2, {0.0f, 1.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.01f * size_grid, 0.05f * size_grid, 0.02f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(0.f, 0.f, 0.f);
+    cube->draw();
+    myEngine.mvMatrixStack.popMatrix();
+
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({-1.24f * size_grid, 2.56f * size_grid, 0.37f * size_grid});
+    myEngine.mvMatrixStack.addRotation(M_PI / 4, {1.0f, 0.0f, 0.0f});
+    myEngine.mvMatrixStack.addHomothety({0.02f * size_grid, 0.2f * size_grid, 0.02f * size_grid});
+    myEngine.updateMvMatrix();
+    myEngine.setFlatColor(0.157f, 0.071f, 0.008f);
+    cube->draw();
+    myEngine.mvMatrixStack.popMatrix();
+
+    int nb_spheres = 5;
+
+    for (int i = 0; i < nb_spheres; ++i)
+    {
+        myEngine.mvMatrixStack.pushMatrix();
+
+        float forward = timer + (i * 0.12f);
+        forward = fmod(forward, 1.0f);
+
+        float max_y = 1.0f * size_grid;
+        float max_z = 1.0f * size_grid;
+
+        float y = forward * max_y;
+        float z = forward * max_z;
+
+        myEngine.mvMatrixStack.addTranslation({-1.24f * size_grid,
+                                               (2.56f * size_grid) + y,
+                                               (0.37f * size_grid) + z});
+
+        float scale = 0.05f * (1.0f - forward);
+        if (scale < 0.001f)
+            scale = 0.001f;
+
+        myEngine.mvMatrixStack.addHomothety({scale * size_grid, scale * size_grid, scale * size_grid});
+        myEngine.updateMvMatrix();
+        myEngine.setFlatColor(1.f, 0.91f, 0.106f);
+        sphere->draw();
+        myEngine.mvMatrixStack.popMatrix();
+    }
+
+    timer += 0.02f;
+}
+
 void station()
 {
     bench();
@@ -270,4 +406,5 @@ void station()
     pannelStation();
     lamp();
     books();
+    harryPotter();
 }

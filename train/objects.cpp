@@ -87,6 +87,7 @@ void initAllObjects() {
 
 	cone = basicCone(1.f, 1.f);
 	cone->createVAO();
+
 	// 1/4 arc
 	std::vector<float> rail;
 	float R = 1.0f;
