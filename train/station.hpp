@@ -13,3 +13,5 @@ void lamp();
 void books();
 void lampsPlacement();
 void harryPotter();
+void stationPlacement();
+void station();

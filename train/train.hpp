@@ -6,4 +6,5 @@
 void wheels();
 void body();
 void smoke();
+void trainPlacement();
 void train();

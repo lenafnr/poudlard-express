@@ -29,15 +29,15 @@
 │   ├── main.cpp
 │   ├── objects.cpp : définition et initialisation de nos objets 2D (arc de cercle, cercle) et 3D
 │   ├── objects.hpp
-│   ├── rails.cpp
+│   ├── rails.cpp : contient railsPlacement()
 │   ├── rails.hpp
-│   ├── station.cpp
+│   ├── station.cpp : contient stationPlacement() et lampPlacement()
 │   ├── station.hpp
 │   ├── texture_manager.cpp
 │   ├── texture_manager.hpp
-│   ├── train.cpp
+│   ├── train.cpp : contient trainPlacement()
 │   ├── train.hpp
-│   ├── trees.cpp
+│   ├── trees.cpp : contient treesPlacement()
 │   └── trees.hpp
 ├── .gitignore
 ├── CMakeLists.txt

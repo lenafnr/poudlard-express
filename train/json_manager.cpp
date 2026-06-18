@@ -5,6 +5,7 @@ using json = nlohmann::json;
 
 float size_grid{};
 std::array<int, 2> stationPos{};
+std::array<int, 2> trainPos{};
 std::vector<std::array<int, 2>> railsPos{};
 std::vector<std::array<int, 2>> treesPos{};
 std::vector<std::array<int, 2>> pinePos{};
@@ -34,6 +35,10 @@ void initJson()
 	stationPos = {
 		data["origin"][0].get<int>(),
 		data["origin"][1].get<int>()};
+
+	trainPos = {
+		data["path"][0][0].get<int>(),
+		data["path"][0][1].get<int>()};
 
 	treesPos.clear();
 

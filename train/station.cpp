@@ -397,6 +397,14 @@ void harryPotter()
     timer += 0.02f;
 }
 
+void stationPlacement() {
+    myEngine.mvMatrixStack.pushMatrix();
+        myEngine.mvMatrixStack.addTranslation({stationPos[0] * size_grid, stationPos[1] * size_grid, 0});
+        myEngine.updateMvMatrix();
+        station();
+	myEngine.mvMatrixStack.popMatrix();
+}
+
 void station()
 {
     bench();
