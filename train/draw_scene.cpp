@@ -54,18 +54,11 @@ void drawScene()
 	railsPlacement();
 	treesPlacement();
 	lampsPlacement();
-	myEngine.mvMatrixStack.pushMatrix();
-	myEngine.mvMatrixStack.addTranslation({2.f * size_grid, 0.1f * size_grid, 0.2f * size_grid});
-	myEngine.mvMatrixStack.addRotation(M_PI /2 , {0.0f, 0.0f, 1.0f});
-	myEngine.updateMvMatrix();
-	train();
-	myEngine.mvMatrixStack.popMatrix();
 
-	myEngine.mvMatrixStack.pushMatrix();
-	myEngine.mvMatrixStack.addTranslation({stationPos[0] * size_grid, stationPos[1] * size_grid, 0});
-	myEngine.updateMvMatrix();
-	station();
-	myEngine.mvMatrixStack.popMatrix();
+	trainPlacement();
+
+	stationPlacement();
+	
 	drawRect();
 	if (phong_lightning) {
 		myEngine.switchToFlatShading();

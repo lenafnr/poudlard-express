@@ -1,4 +1,5 @@
 #include "train.hpp"
+#include <array>
 
 void wheels() {
     float big_radius {0.13f * size_grid};
@@ -209,6 +210,16 @@ void smoke() {
             textureCloud.detachTexture();
             myEngine.activateTexturing(false);
         myEngine.mvMatrixStack.popMatrix();
+}
+
+void trainPlacement() {
+    myEngine.mvMatrixStack.pushMatrix();
+        myEngine.mvMatrixStack.addTranslation({(trainPos[0] + 0.5f) * size_grid, (trainPos[1] + 0.5f) * size_grid, 0.2f * size_grid});
+        myEngine.mvMatrixStack.addRotation(M_PI / 2, {0.f, 0.f, 1.f});
+        myEngine.mvMatrixStack.addTranslation({-0.5f * size_grid, -0.5f * size_grid, 0.f});
+        myEngine.updateMvMatrix();
+        train();
+	myEngine.mvMatrixStack.popMatrix();
 }
 
 void train() {
