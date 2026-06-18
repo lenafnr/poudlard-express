@@ -57,7 +57,6 @@ void initAllObjects() {
 								 size_grid * 5, size_grid * 5, 0.0,
 								 -size_grid * 5, size_grid * 5, 0.0};
 
-	myEngine.setNormalForConvex2DShape({0.f, 0.f, 1.f});
 	ground.initShape(baseCarre);
 	ground.changeNature(GL_TRIANGLE_FAN);
 
@@ -77,7 +76,6 @@ void initAllObjects() {
 	sphere->createVAO(); // Creation de l'objet dans OpenGL
 
 	createCircle(1.f);
-	myEngine.setNormalForConvex2DShape({0.f, 0.f, 1.f});
 	circle.initShape(pointCircle);
 	circle.changeNature(GL_TRIANGLE_FAN);
 
@@ -115,7 +113,6 @@ void initAllObjects() {
 		rail.push_back(y2);
 		rail.push_back(0.f);
 	}
-	myEngine.setNormalForConvex2DShape({0.f, 0.f, 1.f});
 	arc.initShape(rail);
 	arc.changeNature(GL_TRIANGLE_STRIP);
 }
